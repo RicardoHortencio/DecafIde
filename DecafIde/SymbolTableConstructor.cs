@@ -579,10 +579,12 @@ namespace DecafIde
 
         #endregion
 
+        #region arg
         public override void ExitArg(DecafParser.ArgContext context)
         {
             setNodeType(context, getNodeType(context.expression()));
         }
+        #endregion
 
         #region Literal Rules
         public override void ExitBool_literal(DecafParser.Bool_literalContext context)

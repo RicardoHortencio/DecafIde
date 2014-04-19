@@ -148,6 +148,7 @@
             this.CodeTB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.CodeTB.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CodeTB.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.CodeTB.IsReplaceMode = false;
             this.CodeTB.Location = new System.Drawing.Point(0, 0);
             this.CodeTB.Name = "CodeTB";

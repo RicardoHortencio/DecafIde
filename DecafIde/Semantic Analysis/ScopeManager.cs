@@ -127,7 +127,6 @@ namespace DecafIde.Semantic_Analysis
         /// <returns></returns>
         internal bool CheckScope(string id, symbolCategory theCategory)
         {
-            Symbol result = null;
             Boolean symbolFound = false;
             Stack<SymbolTable> tempStack = new Stack<SymbolTable>();
 
