@@ -402,7 +402,7 @@ namespace DecafIde
         }
         public override void ExitSingle_location(DecafParser.Single_locationContext context)
         {
-            Symbol tempSymbol = theScopeManager.FindSymbol(context.Id().GetText(), symbolCategory.Cvariable);
+            Symbol tempSymbol = theScopeManager.currentScopeFindSymbol(context.Id().GetText(), symbolCategory.Cvariable);
             if (context.location() != null)
             {
                 setNodeType(context, getNodeType(context.location()));

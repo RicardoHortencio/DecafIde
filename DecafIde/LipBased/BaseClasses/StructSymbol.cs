@@ -5,11 +5,11 @@ using System.Text;
 
 namespace DecafIde.LipBased
 {
-    class StructSymbol: ScopedSymbol, Type, Scope
+    class StructSymbol: ScopedSymbol, IType, IScope
     {
         Dictionary<String, Symbol> fields = new Dictionary<string, Symbol>();
 
-        public StructSymbol(string name, Scope parent) : base(name, parent) { }
+        public StructSymbol(string name, IScope parent) : base(name, parent) { }
 
         public Symbol resolveMember(string name)
         {
@@ -23,11 +23,15 @@ namespace DecafIde.LipBased
             return fields;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return "struct"+getName()+":{"+
                 stripBrackets(fields.Keys.ToString()) + "}";
         }
 
+        public SymbolType getTypeIndex()
+        {
+            return SymbolType.Tuser;
+        }
     }
 }

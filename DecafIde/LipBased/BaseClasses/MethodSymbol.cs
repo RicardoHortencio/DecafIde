@@ -9,7 +9,7 @@ namespace DecafIde.LipBased
     {
         Dictionary<String, Symbol> orderedArgs = new Dictionary<string, Symbol>();
 
-        public MethodSymbol(String name, Type retType, Scope parent):base(name, retType, parent) {}
+        public MethodSymbol(String name, IType retType, IScope parent):base(name, retType, parent) {}
 
         public override Dictionary<string, Symbol> getMembers()
         {

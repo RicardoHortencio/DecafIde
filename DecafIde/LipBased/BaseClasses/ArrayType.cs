@@ -5,19 +5,19 @@ using System.Text;
 
 namespace DecafIde.LipBased
 {
-    class ArrayType : Symbol, Type
+    class ArrayType : Symbol, IType
     {
-        Type elementType;
+        IType elementType;
 
-        public ArrayType(Type theElementType)
+        public ArrayType(IType theElementType)
             : base(theElementType + "[]")
         {
             this.elementType = theElementType;
         }
 
-        public int getTypeIndex()
+        public SymbolType getTypeIndex()
         {
-            return 0;
+            return SymbolType.Tuser;
         }
     }
 }

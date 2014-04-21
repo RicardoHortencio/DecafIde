@@ -5,17 +5,17 @@ using System.Text;
 
 namespace DecafIde.LipBased
 {
-    abstract class ScopedSymbol: Symbol, Scope
+    abstract class ScopedSymbol: Symbol, IScope
     {
-        Scope enclosingScope;
+        IScope enclosingScope;
 
-        public ScopedSymbol(string name, Type type, Scope theEnclosingScope)
+        public ScopedSymbol(string name, IType type, IScope theEnclosingScope)
             :base(name, type)
         {
             this.enclosingScope = theEnclosingScope;
         }
 
-        public ScopedSymbol(string name, Scope theEnclosingScope)
+        public ScopedSymbol(string name, IScope theEnclosingScope)
             : base(name)
         {
             this.enclosingScope = theEnclosingScope;
@@ -25,9 +25,7 @@ namespace DecafIde.LipBased
         {
             Symbol s;
             if (getMembers().TryGetValue(name, out s))
-            {
                 return s;
-            }
             else
                 if (getEnclosingScope() != null)
                     return getEnclosingScope().resolve(name);
@@ -46,7 +44,7 @@ namespace DecafIde.LipBased
             sym.Scope = this;
         }
         
-        public Scope getEnclosingScope()
+        public IScope getEnclosingScope()
         {
             return enclosingScope;
         }

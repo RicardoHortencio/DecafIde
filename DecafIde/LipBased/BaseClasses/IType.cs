@@ -5,8 +5,9 @@ using System.Text;
 
 namespace DecafIde.LipBased
 {
-    public interface Type
+    public interface IType
     {
         string getName();
+        SymbolType getTypeIndex();
     }
 }

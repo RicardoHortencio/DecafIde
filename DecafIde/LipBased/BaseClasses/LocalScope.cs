@@ -7,7 +7,7 @@ namespace DecafIde.LipBased
 {
     class LocalScope : BaseScope
     {
-        public LocalScope(Scope parent) : base(parent) { }
+        public LocalScope(IScope parent) : base(parent) { }
 
         public string getScopeName() { return "local"; }
     }

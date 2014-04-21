@@ -5,25 +5,14 @@ using System.Text;
 
 namespace DecafIde.LipBased
 {
-    abstract class BaseScope : Scope
+    abstract class BaseScope : IScope
     {
-        Scope enclosingScope;
+        IScope enclosingScope;
         Dictionary<string, Symbol> symbols = new Dictionary<string, Symbol>();
 
-        public BaseScope(Scope parent)
+        public BaseScope(IScope parent)
         {
             this.enclosingScope = parent;
-        }
-
-        public Scope getEnclosingScope()
-        {
-            return enclosingScope;
-        }
-
-        public void define(Symbol sym)
-        {
-            symbols.Add(sym.getName(), sym);
-            sym.Scope = this;
         }
 
         public Symbol resolve(string name)
@@ -38,9 +27,25 @@ namespace DecafIde.LipBased
                     return null;
         }
 
+        public void define(Symbol sym)
+        {
+            symbols.Add(sym.getName(), sym);
+            sym.Scope = this;
+        }
+
+        public IScope getEnclosingScope()
+        {
+            return enclosingScope;
+        }
+
         public override string ToString()
         {
             return symbols.Keys.ToString();
+        }
+
+        public string getScopeName()
+        {
+            return "";
         }
     }
 }

@@ -8,10 +8,10 @@ namespace DecafIde.LipBased
     public class Symbol
     {
         String name;
-        Type type;
-        Scope scope;
+        IType type;
+        IScope scope;
 
-        internal Scope Scope
+        internal IScope Scope
         {
             get { return scope; }
             set { scope = value; }
@@ -21,7 +21,7 @@ namespace DecafIde.LipBased
             this.name = name;
         }
 
-        public Symbol(String name, Type type):this(name)
+        public Symbol(String name, IType type):this(name)
         {
             this.type = type;
         }
@@ -30,7 +30,7 @@ namespace DecafIde.LipBased
             return name;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             string s = "";
             if (scope != null) s = scope.getScopeName() + ".";

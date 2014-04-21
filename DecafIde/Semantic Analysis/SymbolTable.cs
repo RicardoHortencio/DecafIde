@@ -6,6 +6,9 @@ using System.Text;
 
 namespace DecafIde.Semantic_Analysis
 {
+    /// <summary>
+    /// A symbol table is essentially a variable, methods and structs dictionary.
+    /// </summary>
     class SymbolTable
     {
         private Dictionary<string, Symbol> theVariableTable;
@@ -19,19 +22,32 @@ namespace DecafIde.Semantic_Analysis
             theStructDeclTable = new Dictionary<string, Symbol>();
         }
 
+        /// <summary>
+        /// Joins the current symbol table with the passed dictionary.
+        /// </summary>
+        /// <param name="theTable">The dictionary you're joining</param>
         public void Add(Dictionary<string, Symbol> theTable)
         {
             foreach (KeyValuePair<string, Symbol> singleSymbol in theTable)
             {
-                this.Add(singleSymbol.Key, singleSymbol.Value);
+                this.Add(singleSymbol);
             }
         }
 
+        /// <summary>
+        /// Adds the current keyValuePair to the corresponding dictionary.
+        /// </summary>
+        /// <param name="thePair">the current keyValuePair</param>
         public void Add(KeyValuePair<string, Symbol> thePair)
         {
             this.Add(thePair.Key, thePair.Value);
         }
 
+        /// <summary>
+        /// Adds the current name-symbol pair to the corresponding dictionary.
+        /// </summary>
+        /// <param name="name">the symbol name</param>
+        /// <param name="theSymbol">the symbol value</param>
         public void Add(string name, Symbol theSymbol)
         {
 
@@ -61,8 +77,14 @@ namespace DecafIde.Semantic_Analysis
 
         }
 
+        /// <summary>
+        /// Checks whether the symbol id is contained within the specified category
+        /// </summary>
+        /// <param name="id">The id to look for</param>
+        /// <param name="theCategory">The category that you should try to find it into</param>
+        /// <returns>True if the symbol is found, false otherwise.</returns>
         public bool CheckSymbol(string id, symbolCategory theCategory)
-        {
+        { 
             switch (theCategory)
             {
                 case symbolCategory.Cvariable:
@@ -76,6 +98,12 @@ namespace DecafIde.Semantic_Analysis
             }
         }
 
+        /// <summary>
+        /// Finds and retrieves the symbol by Id and category.
+        /// </summary>
+        /// <param name="id">The id you're looking for</param>
+        /// <param name="theCategory">The category you're looking into</param>
+        /// <returns>The symbol or null if not found.</returns>
         public Symbol FindSymbol(string id, symbolCategory theCategory)
         {
             Symbol theResult;
@@ -101,6 +129,12 @@ namespace DecafIde.Semantic_Analysis
             }
         }
 
+        /// <summary>
+        /// Finds and retrieves the specified symbol type by ID and Category
+        /// </summary>
+        /// <param name="id">The id you're looking for.</param>
+        /// <param name="theCategory">The category you're looking into.</param>
+        /// <returns></returns>
         public SymbolType? GetSymbolType(string id, symbolCategory theCategory)
         {
             Symbol tempSymbol = FindSymbol(id, theCategory);

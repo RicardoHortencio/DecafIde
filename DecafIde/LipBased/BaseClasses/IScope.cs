@@ -5,10 +5,10 @@ using System.Text;
 
 namespace DecafIde.LipBased
 {
-    public interface Scope
+    public interface IScope
     {
         string getScopeName();
-        Scope getEnclosingScope();
+        IScope getEnclosingScope();
         void define(Symbol sym);
         Symbol resolve(String name);
     }

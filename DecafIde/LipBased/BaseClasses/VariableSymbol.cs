@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DecafIde.LipBased
 {
-    class BuiltInTypeSymbol : Symbol, Type
+    class VariableSymbol: Symbol
     {
-        public BuiltInTypeSymbol(String name) : base(name) { }
+        public VariableSymbol(String name, IType type) : base(name, type) {}
     }
 }

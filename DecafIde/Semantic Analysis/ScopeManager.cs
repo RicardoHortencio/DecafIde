@@ -13,20 +13,32 @@ namespace DecafIde.Semantic_Analysis
         /// Store for the symbol tables
         /// </summary>
         Stack<SymbolTable> theStack;
+        /// <summary>
+        /// Stores the current return value Type
+        /// </summary>
         SymbolType returnType = SymbolType.Tvoid;
         Boolean hasReturn = false;
 
-
+        /// <summary>
+        /// Resets the return to false;
+        /// </summary>
         public void resetReturn()
         {
             hasReturn = false;
         }
 
+
+        /// <summary>
+        /// Whether or not the current scope has a return value
+        /// </summary>
         public Boolean HasReturn
         {
             get { return hasReturn; }
         }
 
+        /// <summary>
+        /// Sets the return value type to something meaningful
+        /// </summary>
         public SymbolType ReturnType
         {
             get { return returnType; }
@@ -62,6 +74,12 @@ namespace DecafIde.Semantic_Analysis
             theStack.Push(new SymbolTable());
         }
 
+        /// <summary>
+        /// Performs and superficial search of a certain symbol
+        /// </summary>
+        /// <param name="id">The symbol ID</param>
+        /// <param name="theCategory">The symbol category</param>
+        /// <returns></returns>
         public Symbol currentScopeFindSymbol(string id, symbolCategory theCategory)
         {
             Symbol result = null;
@@ -150,6 +168,10 @@ namespace DecafIde.Semantic_Analysis
             return theStack.Pop();
         }
 
+        /// <summary>
+        /// Pushes a certain symboTable as the current scope.
+        /// </summary>
+        /// <param name="theTable"></param>
         internal void PushSymbolTable(SymbolTable theTable)
         {
             theStack.Push(theTable);

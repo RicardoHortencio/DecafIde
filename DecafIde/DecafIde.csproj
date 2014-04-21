@@ -72,19 +72,20 @@
     <Compile Include="IronyFCTB.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LipBased\ArrayType.cs" />
-    <Compile Include="LipBased\BaseScope.cs" />
-    <Compile Include="LipBased\BuiltInTypeSymbol.cs" />
-    <Compile Include="LipBased\GlobalScope.cs" />
-    <Compile Include="LipBased\LocalScope.cs" />
-    <Compile Include="LipBased\MethodSymbol.cs" />
-    <Compile Include="LipBased\Scope.cs" />
-    <Compile Include="LipBased\ScopedSymbol.cs" />
-    <Compile Include="LipBased\StructSymbol.cs" />
-    <Compile Include="LipBased\Symbol.cs" />
-    <Compile Include="LipBased\SymbolTable.cs" />
-    <Compile Include="LipBased\Type.cs" />
-    <Compile Include="LipBased\VariableSymbol.cs" />
+    <Compile Include="LipBasedSTBuilder.cs" />
+    <Compile Include="LipBased\BaseClasses\ArrayType.cs" />
+    <Compile Include="LipBased\BaseClasses\BaseScope.cs" />
+    <Compile Include="LipBased\BaseClasses\BuiltInTypeSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\GlobalScope.cs" />
+    <Compile Include="LipBased\BaseClasses\LocalScope.cs" />
+    <Compile Include="LipBased\BaseClasses\MethodSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\IScope.cs" />
+    <Compile Include="LipBased\BaseClasses\ScopedSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\StructSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\Symbol.cs" />
+    <Compile Include="LipBased\BaseClasses\SymbolTable.cs" />
+    <Compile Include="LipBased\BaseClasses\IType.cs" />
+    <Compile Include="LipBased\BaseClasses\VariableSymbol.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
