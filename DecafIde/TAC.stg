@@ -1,0 +1,118 @@
+    /*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+group TAC;
+
+Main(structDec, field, method) ::= <<
+
+    .class Program 
+    {
+		<structDec; separator="\n">
+		<field; separator="\n">
+		<mainMethod; separator="\n">
+		<method; separator="\n">
+    }
+>>
+
+StructDec(name, structDec, field) ::= <<
+.public static class <name>
+  {
+    <structDec; separator="\n">
+    <field; separator="\n">
+  } // end of class <name>
+>>
+
+Field(typeName, id, isArray) ::= <<
+    .field public <typeName><if(isArray)>[]<endif> <id>program
+>>  
+
+Method(type, id, parameters, statements) ::= <<
+.method public <type> '<id>'(<parameters; separator=",">) 
+  {
+    <statements; separator="\n">
+  } // end of method Program::'<id>'
+  >>
+
+	MainMethod(type, stackSize, statements) ::= <<
+		.method private static <type>  Main(
+	  {
+		.entrypoint
+                .maxstack <stackSize>
+		<statements; separator="\n">
+    
+	  } // end of method Program::Main
+	>>
+
+
+TypeName(typeName, isStruct) ::= <<
+    <if(isStruct)>valuetype<endif> <typeName>
+>>
+
+Parameter(typeName, parameterId) ::=<<
+	<typeName> <parameterId>
+>>
+  
+BinaryOp(exp1, op, exp2, it1, it2, it3) ::= <<
+    t<it1> = <exp1>;
+    t<it2> = <exp2>;
+    t<it3> = t<it1> <op> t<it2>;
+>>
+  
+Assignment(Lside, Rside, it4)  ::= <<
+    <it4> = <Rside>;
+    <Lside> = <it4>;
+>>
+  
+If(condition, code, t0, L0)  ::= <<
+    _t<t0> = <condition> ;
+    IfZ _t<t0> Goto _L<L0>; 
+    <code>
+_L<L0>:    
+>>
+  
+IfElse(condition, ifcode, elsecode, t0, L0, t1, L1)  ::= <<
+    _t<t0> = <condition> ;
+    IfZ _t<t0> Goto _L<L0>; 
+    <ifcode>
+    Goto _L<L1>;
+_L<L0>:
+    <elseCode>
+_L<L1>:    
+>>
+
+While(condition, code, t0, L0, L1)  ::= <<
+_L<L0>:
+    _t<t0> = <condition>;
+    IfZ _t<t0> Goto _L<L1>;
+    <code>
+    Goto _L<L0>;
+_L<L1>:    
+>>  
+
+Return(expression) ::= <<
+    return <expression>;
+>>
+
+MethodCall(methodName) ::= <<
+    call <methodName>;
+>>
+
+VarDecl(id, type) ::= <<
+    Load<type> <id>;
+>>
+
+VarStructDecl(id, type) ::= <<
+    LoadStruct <id>;
+    LoadStructName <type>;
+>>
+
+ArrayDecl(varloading, position) ::= <<
+{
+    <varloading>
+    LoadPosition <position>;
+}
+
+>>

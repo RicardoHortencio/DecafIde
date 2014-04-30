@@ -402,7 +402,8 @@ namespace DecafIde
         }
         public override void ExitSingle_location(DecafParser.Single_locationContext context)
         {
-            Symbol tempSymbol = theScopeManager.currentScopeFindSymbol(context.Id().GetText(), symbolCategory.Cvariable);
+            string symbolName = context.Id().GetText();
+            Symbol tempSymbol = theScopeManager.FindSymbol(context.Id().GetText(), symbolCategory.Cvariable);
             if (context.location() != null)
             {
                 setNodeType(context, getNodeType(context.location()));
@@ -416,11 +417,13 @@ namespace DecafIde
 
         public override void EnterArray_location(DecafParser.Array_locationContext context)
         {
+            //Get the current symbol reference.
             Symbol tempSymbol = theScopeManager.FindSymbol(context.Id().GetText(), symbolCategory.Cvariable);
             if (context.location() != null)
             {
                 StructArraySymbol typedSymbol = tempSymbol as StructArraySymbol;
                 string structDecName = typedSymbol.ParentStructName;
+                //Find the current struct declaration name.
                 StructDeclSymbol typedParent = theScopeManager.FindSymbol(structDecName, symbolCategory.CstructDecl) as StructDeclSymbol;
                 theScopeManager.PushSymbolTable(typedParent.Members);
             }
@@ -428,11 +431,13 @@ namespace DecafIde
 
         public override void ExitArray_location(DecafParser.Array_locationContext context)
         {
+            // Finds the current symbol reference.
             Symbol tempSymbol = theScopeManager.FindSymbol(context.Id().GetText(), symbolCategory.Cvariable);
             if (context.location() != null)
             {
                 StructArraySymbol typedSymbol = tempSymbol as StructArraySymbol;
                 string structDecName = typedSymbol.ParentStructName;
+                // Gets the struct definition symbol.
                 StructDeclSymbol typedParent = theScopeManager.FindSymbol(structDecName, symbolCategory.CstructDecl) as StructDeclSymbol;
                 theScopeManager.PushSymbolTable(typedParent.Members);
                 setNodeType(context, getNodeType(context.location()));

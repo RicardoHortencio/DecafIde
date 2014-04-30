@@ -36,6 +36,12 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.indentLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tryTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TreeVisualizer = new System.Windows.Forms.TreeView();
             this.MainContainer = new System.Windows.Forms.SplitContainer();
             this.CodeTB = new FastColoredTextBoxNS.IronyFCTB();
@@ -64,7 +70,8 @@
             // 
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.buildToolStripMenuItem});
+            this.buildToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(516, 24);
@@ -111,6 +118,51 @@
             this.runToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.runToolStripMenuItem.Text = "Run";
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.indentLinesToolStripMenuItem,
+            this.tryTemplateToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(138, 6);
+            // 
+            // indentLinesToolStripMenuItem
+            // 
+            this.indentLinesToolStripMenuItem.Name = "indentLinesToolStripMenuItem";
+            this.indentLinesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.indentLinesToolStripMenuItem.Text = "Indent Lines";
+            this.indentLinesToolStripMenuItem.Click += new System.EventHandler(this.indentLinesToolStripMenuItem_Click);
+            // 
+            // tryTemplateToolStripMenuItem
+            // 
+            this.tryTemplateToolStripMenuItem.Name = "tryTemplateToolStripMenuItem";
+            this.tryTemplateToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.tryTemplateToolStripMenuItem.Text = "TryTemplate";
+            this.tryTemplateToolStripMenuItem.Click += new System.EventHandler(this.tryTemplateToolStripMenuItem_Click);
             // 
             // TreeVisualizer
             // 
@@ -224,6 +276,12 @@
         private System.Windows.Forms.Label ErrorLbl;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private FastColoredTextBoxNS.IronyFCTB CodeTB;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem indentLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tryTemplateToolStripMenuItem;
     }
 }
 

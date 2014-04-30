@@ -1,0 +1,73 @@
+group CIL;
+
+file(defs) ::= <<
+.assembly extern mscorlib
+{
+  .publickeytoken = (B7 7A 5C 56 19 34 E0 89 )
+  .ver 4:0:0:0
+}
+.assembly ex
+{
+}
+
+// =============== CLASS MEMBERS DECLARATION ===================
+
+.class private auto ansi beforefieldinit Program
+       extends [mscorlib]System.Object
+{
+
+<defs; separator="\n">
+
+.method public hidebysig specialname rtspecialname 
+          instance void  .ctor() cil managed
+  {
+    // Code size       21 (0x15)
+    .maxstack  8
+    IL_0000:  ldarg.0
+    IL_0001:  ldc.i4.s   10
+    IL_0003:  newarr     [mscorlib]System.Int32
+    IL_0008:  stfld      int32[] Program::jprogram
+    IL_000d:  ldarg.0
+    IL_000e:  call       instance void [mscorlib]System.Object::.ctor()
+    IL_0013:  nop
+    IL_0014:  ret
+  } // end of method Program::.ctor
+} // end of class Program
+
+
+// =============================================================
+>>
+
+struct(name, fields) ::= <<
+.class sequential ansi sealed nested public beforefieldinit <name>
+         extends [mscorlib]System.ValueType
+  {    
+    <fields; separator="\n">
+  } // end of class <name>
+>>
+
+primitiveField(type, id, isArray) ::= <<
+    .field private <type><if(isArray)>[]<endif> <id>program
+>>  
+
+structField(route, id, isArray) ::= <<
+    .field private valuetype Program/<route><if(isArray)>[]<endif> <id>
+>>
+
+MainMethod(type, statements) ::= <<
+    .method private hidebysig static <type>  Main() cil managed
+  {
+    .entrypoint
+    <statements; separator="\n">
+    
+  } // end of method Program::Main
+>>
+
+
+MainMethod(type, id, parameters, statements) ::= <<
+.method public hidebysig instance <type> 
+          '<id>'(<parameters>) cil managed
+  {
+    <statements; separator="\n">
+  } // end of method Program::'<id>'
+  >>

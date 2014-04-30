@@ -18,6 +18,7 @@ namespace DecafIde
 {
     public partial class MainForm : Form
     {
+        string theFile;
         public MainForm()
         {
             InitializeComponent();
@@ -35,7 +36,6 @@ namespace DecafIde
             e.ChangedRange.SetStyle(BlueStyle, keyWords);
             e.ChangedRange.ClearStyle(NumberStyle);
             e.ChangedRange.SetStyle(NumberStyle, NumbersRegex);
-            e.ChangedRange.SetFoldingMarkers("{", "}");
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48,7 +48,9 @@ namespace DecafIde
                     if ((myStream = openFileDialog.OpenFile()) != null)
                     {
                         CodeTB.Text = File.ReadAllText(openFileDialog.FileName);
+                        theFile = File.ReadAllText(openFileDialog.FileName);
                     }
+                    CodeTB.SelectAll();
                 }
                 catch (Exception ex)
                 {
@@ -59,33 +61,74 @@ namespace DecafIde
 
         private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            AntlrInputStream inputCharStream2 = new AntlrInputStream(CodeTB.Text);
             AntlrInputStream inputCharStream = new AntlrInputStream(CodeTB.Text);
+
+            NewDecafLexer tokenCreator2 = new NewDecafLexer(inputCharStream2);
             DecafLexer tokenCreator = new DecafLexer(inputCharStream);
+
+            CommonTokenStream inputTokenStream2 = new CommonTokenStream(tokenCreator2);
             CommonTokenStream inputTokenStream = new CommonTokenStream(tokenCreator);
+
+
+            NewDecafParser mainParser2 = new NewDecafParser(inputTokenStream2);
             DecafParser mainParser = new DecafParser(inputTokenStream);
 
             errorTB.Text = "";
             mainParser.RemoveErrorListeners();
             mainParser.AddErrorListener(new ParsingErrorDetector(errorTB));
 
+            NewDecafParser.ProgramContext AbstractSyntaxTree2 = mainParser2.program();
             DecafParser.ProgramContext AbstractSyntaxTree = mainParser.program();
 
-            TreeConstructingVisitor visitor = new TreeConstructingVisitor(TreeVisualizer);
-            visitor.Visit(AbstractSyntaxTree);
-
+            
+            
+            //TreeConstructingVisitor visitor = new TreeConstructingVisitor(TreeVisualizer);
+            //visitor.Visit(AbstractSyntaxTree);
+            
+            ParseTreeWalker walker2 = new ParseTreeWalker();
             ParseTreeWalker walker = new ParseTreeWalker();
+            
             SymbolTableConstructor theConstructor = new SymbolTableConstructor();
-            try
-            {
+
+            string generated = "";
+            ILGenerator theGenerator = new ILGenerator(generated);
+            //try
+            //{
+                walker2.Walk(theGenerator, AbstractSyntaxTree2);
                 walker.Walk(theConstructor, AbstractSyntaxTree);
-            }
-            catch (Exception ex)
-            {
-                errorTB.Text += ex.Message + Environment.NewLine;
-                errorTB.Text += "Error found between line " + theConstructor.beginningLine + " and line " + theConstructor.endingLine;
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    errorTB.Text += ex.Message + Environment.NewLine;
+            //    if (theConstructor.beginningLine == theConstructor.endingLine)
+            //        errorTB.Text += "Error found in line " + theConstructor.beginningLine;
+            //    else
+            //    errorTB.Text += "Error found between line " + theConstructor.beginningLine + " and line " + theConstructor.endingLine;
+            //}
             if (errorTB.Text == string.Empty)
                 errorTB.Text = "Congrats! No errors were found!";
+
+            MessageBox.Show(theGenerator.finalResult);
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CodeTB.Copy();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CodeTB.Paste();
+        }
+
+        private void indentLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void tryTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show( stringtemplateTryout.tryMyTemplate());
         }
     }
 }

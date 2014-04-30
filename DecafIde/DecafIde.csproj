@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr4.Runtime.4.2.2-alpha001\lib\net40\Antlr4.Runtime.v4.0.dll</HintPath>
     </Reference>
+    <Reference Include="Antlr4.StringTemplate">
+      <HintPath>..\packages\Antlr4.StringTemplate.4.0.6.9004\lib\net35\Antlr4.StringTemplate.dll</HintPath>
+    </Reference>
     <Reference Include="FastColoredTextBox">
       <HintPath>..\IronyFCTB\IronyFCTB\bin\Debug\FastColoredTextBox.dll</HintPath>
     </Reference>
@@ -69,28 +72,44 @@
       <DependentUpon>Decaf.g4</DependentUpon>
     </Compile>
     <Compile Include="HelperClasses\TypeHelper.cs" />
-    <Compile Include="IronyFCTB.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="LipBasedSTBuilder.cs" />
-    <Compile Include="LipBased\BaseClasses\ArrayType.cs" />
-    <Compile Include="LipBased\BaseClasses\BaseScope.cs" />
-    <Compile Include="LipBased\BaseClasses\BuiltInTypeSymbol.cs" />
-    <Compile Include="LipBased\BaseClasses\GlobalScope.cs" />
-    <Compile Include="LipBased\BaseClasses\LocalScope.cs" />
-    <Compile Include="LipBased\BaseClasses\MethodSymbol.cs" />
-    <Compile Include="LipBased\BaseClasses\IScope.cs" />
-    <Compile Include="LipBased\BaseClasses\ScopedSymbol.cs" />
-    <Compile Include="LipBased\BaseClasses\StructSymbol.cs" />
-    <Compile Include="LipBased\BaseClasses\Symbol.cs" />
-    <Compile Include="LipBased\BaseClasses\SymbolTable.cs" />
-    <Compile Include="LipBased\BaseClasses\IType.cs" />
-    <Compile Include="LipBased\BaseClasses\VariableSymbol.cs" />
+    <Compile Include="ILCode\ClassMembers\FieldDeclaration.cs" />
+    <Compile Include="ILCode\ClassMembers\MainMethod.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\LocalVariable.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Parameter.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\AssignmentStmt.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ControlStructures\IfCmd.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ControlStructures\IfElseCmd.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ControlStructures\While.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ExpressionBaseClass.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperation.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\ArtihOperations.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\BolOperation.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\EquOperation.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\RelOperation.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\LocationStmt.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperation.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperatos\NegOperator.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperatos\NotOperator.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\MethodCall.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ReturnStmt.cs" />
+    <Compile Include="ILCode\Command.cs" />
+    <Compile Include="ILCode\MainClass.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodDeclaration.cs" />
+    <Compile Include="ILCode\ClassMembers\StructDeclaration.cs" />
+    <Compile Include="ILCode\TypeMapper.cs" />
+    <Compile Include="ILCode\VarType.cs" />
+    <Compile Include="ILGenerator.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewDecaf.g4.lexer.cs">
+      <DependentUpon>NewDecaf.g4</DependentUpon>
+    </Compile>
+    <Compile Include="NewDecaf.g4.parser.cs">
+      <DependentUpon>NewDecaf.g4</DependentUpon>
     </Compile>
     <Compile Include="ParsingErrorDetector.cs" />
     <Compile Include="Program.cs" />
@@ -103,6 +122,7 @@
     <Compile Include="Semantic Analysis\SymbolTable.cs" />
     <Compile Include="Semantic Analysis\Symbol.cs" />
     <Compile Include="Semantic Analysis\ScopeManager.cs" />
+    <Compile Include="stringtemplateTryout.cs" />
     <Compile Include="SymbolTableConstructor.cs" />
     <Compile Include="TreeConstructingVisitor.cs" />
     <EmbeddedResource Include="MainForm.resx">
@@ -125,6 +145,11 @@
       <Visitor>True</Visitor>
       <Listener>True</Listener>
     </Antlr4>
+    <None Include="CIL.stg" />
+    <Antlr4 Include="NewDecaf.g4">
+      <Generator>MSBuild:Compile</Generator>
+      <CustomToolNamespace>DecafIde</CustomToolNamespace>
+    </Antlr4>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -135,7 +160,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TAC.stg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
