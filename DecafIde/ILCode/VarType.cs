@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace DecafIde.ILCode
 {
     class VarType : Command
@@ -30,6 +26,6 @@ namespace DecafIde.ILCode
         {
             setPlaceholder("isStruct", isStruct);
             setPlaceholder("typeName", typeName);
-        }        
+        }
     }
 }

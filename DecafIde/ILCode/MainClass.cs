@@ -1,9 +1,5 @@
-﻿using Antlr4.StringTemplate;
-using DecafIde.ILCode.ClassMembers;
-using System;
+﻿using DecafIde.ILCode.ClassMembers;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DecafIde.ILCode
 {
@@ -54,7 +50,7 @@ namespace DecafIde.ILCode
 
         public MainClass() : base() { }
 
-        public MainClass(List<StructDeclaration> theStructDeclList, 
+        public MainClass(List<StructDeclaration> theStructDeclList,
             List<FieldDeclaration> theFieldDeclList,
             List<MethodDeclaration> theMethodDeclList)
             : this()

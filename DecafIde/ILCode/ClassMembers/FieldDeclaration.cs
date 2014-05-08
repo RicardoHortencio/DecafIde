@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace DecafIde.ILCode.ClassMembers
 {
     class FieldDeclaration : Command
     {
-        VarType theVartype;
-        internal VarType TheVartype
+        VarType typeName;
+        internal VarType TypeName
         {
-            get { return theVartype; }
-            set { theVartype = value; }
+            get { return typeName; }
+            set { typeName = value; }
         }
 
         string fieldId;
@@ -34,7 +30,7 @@ namespace DecafIde.ILCode.ClassMembers
         }
         public override void setGenCode()
         {
-            setSingleCommand(theVartype);
+            setSingleCommand(typeName);
             setPlaceholder("id", fieldId);
             setPlaceholder("isArray", isArray);
         }

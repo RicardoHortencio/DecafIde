@@ -71,17 +71,20 @@
     <Compile Include="Decaf.g4.parser.cs">
       <DependentUpon>Decaf.g4</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\LabelNameGenerator.cs" />
     <Compile Include="HelperClasses\TypeHelper.cs" />
     <Compile Include="ILCode\ClassMembers\FieldDeclaration.cs" />
     <Compile Include="ILCode\ClassMembers\MainMethod.cs" />
-    <Compile Include="ILCode\ClassMembers\MethodMembers\LocalVariable.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\LocalVar.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Parameter.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\StatementBaseClass.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\AssignmentStmt.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ControlStructures\IfCmd.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ControlStructures\IfElseCmd.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ControlStructures\While.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ExpressionBaseClass.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperation.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperator.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\ArtihOperations.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\BolOperation.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\EquOperation.cs" />
@@ -90,13 +93,13 @@
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperation.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperatos\NegOperator.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperatos\NotOperator.cs" />
-    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\MethodCall.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\MethodCallStatement.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ReturnStmt.cs" />
     <Compile Include="ILCode\Command.cs" />
     <Compile Include="ILCode\MainClass.cs" />
     <Compile Include="ILCode\ClassMembers\MethodDeclaration.cs" />
     <Compile Include="ILCode\ClassMembers\StructDeclaration.cs" />
-    <Compile Include="ILCode\TypeMapper.cs" />
+    <Compile Include="HelperClasses\TypeMapper.cs" />
     <Compile Include="ILCode\VarType.cs" />
     <Compile Include="ILGenerator.cs" />
     <Compile Include="MainForm.cs">
@@ -150,6 +153,7 @@
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>DecafIde</CustomToolNamespace>
     </Antlr4>
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

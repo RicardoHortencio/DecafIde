@@ -1,16 +1,19 @@
 ﻿using DecafIde.ILCode.ClassMembers.MethodMembers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DecafIde.ILCode.ClassMembers
 {
     class MainMethod : Command
     {
-        VarType methodType;
-        int stackSize;
-        List<LocalVariable> locals = new List<LocalVariable>();
+        int stackSize = 1;
+
+        public int StackSize
+        {
+            get { return stackSize; }
+            set { stackSize = value; }
+        }
+        List<LocalVar> locals = new List<LocalVar>();
+        List<StatementBaseClass> statements = new List<StatementBaseClass>();
         public override string getTemplateName()
         {
             return "MainMethod";
@@ -18,7 +21,19 @@ namespace DecafIde.ILCode.ClassMembers
 
         public override void setGenCode()
         {
-            throw new NotImplementedException();
+            setPlaceholder("stackSize", stackSize.ToString());
+            setCommandList(locals);
+            setCommandList(statements);
+        }
+
+        public void addCommand(LocalVar theVariable)
+        {
+            locals.Add(theVariable);
+        }
+
+        public void addCommand(StatementBaseClass theStatement)
+        {
+            statements.Add(theStatement);
         }
     }
 }

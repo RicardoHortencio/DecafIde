@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions
 {
-    class LocationStmt
+    class LocationStmt : ExpressionBaseClass
     {
+        public string getLoadLocationCode();
+        public string getStoreLocationCode();
     }
 }

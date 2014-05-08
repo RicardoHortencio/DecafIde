@@ -1,0 +1,559 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="d88d9678-9335-4431-9fcf-170a5dc7653d"
+  name="BinaryOperators"
+  visibility="Private" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <referencesInternal>
+    <reference
+      Id="8c11800a-8747-4dd8-9c43-ff04359ff55f"
+      handle="viewcode://./CodeSchema_Namespace?Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators"
+      tag="ViewCode" />
+  </referencesInternal>
+  <packagedElements>
+    <packageHasNamedElement>
+      <class
+        Id="42f58c0a-1362-4285-b6e4-0af2a9478b7c"
+        name="ArtihOperations"
+        visibility="Package"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="05ac2e06-1e35-4f19-bafb-c9b3db46e458"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DArtihOperations"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="780c150e-76b2-4238-8cc5-466787f13371"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4335f591-df19-4521-b364-d52da5857a42">
+                <propertyInstance
+                  Id="dfb23cc6-7974-4cab-87de-9e07f366b95a"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a78efc2c-31aa-418e-b8c8-10d3f3ed0ad6">
+                <propertyInstance
+                  Id="e98a2211-6202-4612-95e7-e16f571f2833"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e2c9e20f-6f7a-4a16-83e3-c28c0980360e">
+                <propertyInstance
+                  Id="b733f990-f301-4844-b5d9-bc19e5a8985c"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4d8cfa69-3c71-4c9c-9c65-3b415953d49d">
+                <propertyInstance
+                  Id="1e1c6dca-ef0e-4f53-926a-65d79f79181b"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="31194a84-72bc-444e-bd7e-89be981a7843">
+                <propertyInstance
+                  Id="d93a846f-1997-4a63-97f1-b35f17b75995"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="4fe21895-e664-45b3-b183-254ecd72a2d6"
+            isSubstitutable="false">
+            <classMoniker
+              Id="1ca2cba6-8af6-40ff-a913-28e2266643e0"
+              LastKnownName="ExpressionBaseClass"
+              LastKnownLocation="Package4_0001.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="07b26789-02d5-4c5c-b3ec-0df37582841e"
+            name="ArtihOperations"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="b8329be3-f4ee-4e2c-8852-1ac8013b07e2"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DArtihOperations Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="1dd1debc-9dae-4490-9ac8-bac114d5211f"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="44307fa9-47dd-4567-bda5-dc5b6d673411">
+                    <propertyInstance
+                      Id="78ee2e5e-0647-438b-8aa4-abaaa7d5563b"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="269c3b63-16bf-440e-a337-067a9379618d">
+                    <propertyInstance
+                      Id="a07094a9-c395-4b93-9861-6277868f0f44"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b3047616-cfe2-4cd3-9367-c9b4d21c5f85">
+                    <propertyInstance
+                      Id="2d1ea646-10f3-43f0-b76b-f82f7c0e7d88"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="278c1f40-9ddf-481d-99de-79a65ffe90e0">
+                    <propertyInstance
+                      Id="12d9f063-2961-4a75-b1e6-9964d4424526"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="930ef82a-134e-4fcb-9b9b-1ac5ba1e6a3f">
+                    <propertyInstance
+                      Id="463122f4-dad0-4c7c-9d54-68cf93c85de9"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="b29f1f34-8d4c-4254-a2c4-174685171ac0">
+                    <propertyInstance
+                      Id="58f1b857-dda2-440e-a435-f530540e5c80"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="996e5b44-b216-48b0-be07-fdd35ea8e027"
+        name="BolOperation"
+        visibility="Package"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="4436bb38-673d-4c96-a10d-24891744d3d6"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DBolOperation"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="770ec505-2d6d-4144-93b8-3e48aa309268"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0fe25990-2d7c-4733-89a7-09540147b34b">
+                <propertyInstance
+                  Id="26fc4dbd-8d86-4bf0-afa0-1bb29875d5aa"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0adee992-2f6d-4a06-9880-ffb5aac60034">
+                <propertyInstance
+                  Id="f613bc6f-ccbf-481a-8184-209fd3010f51"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="a13a35a4-5a9d-4881-9d92-496279b06817">
+                <propertyInstance
+                  Id="c9a0163b-481d-4f4e-a395-f0f2514bdb7d"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="0ee38c34-1249-4fd9-8811-b29b519e85f0">
+                <propertyInstance
+                  Id="fde16185-fcf5-441a-8bed-fa05a77db167"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1134f93a-d969-43c1-8b96-b63be308404c">
+                <propertyInstance
+                  Id="d65b1cd1-1ee3-4d3f-a01d-f5c6c31ed4d7"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="1ca9432b-7e63-4411-b668-00edbe880a53"
+            isSubstitutable="false">
+            <classMoniker
+              Id="1ca2cba6-8af6-40ff-a913-28e2266643e0"
+              LastKnownName="ExpressionBaseClass"
+              LastKnownLocation="Package4_0001.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="401593a9-c68a-4272-825c-588cfcbdb516"
+            name="BolOperation"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="fb827fc5-0284-42a3-a40d-aa7a6fdc5e01"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DBolOperation Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="62ccf47b-c4c4-4373-b15d-e2bef949e9b9"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="7372d20e-9dbb-4efe-a1e6-7d587cf966a6">
+                    <propertyInstance
+                      Id="dfd6e0f7-1be1-4bf1-8728-4bb60f123e4d"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="2df08319-2686-4c13-ac03-df37a18a1e12">
+                    <propertyInstance
+                      Id="bddd0635-3639-497e-844b-adcc25f6a98c"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="dd434380-b305-45ee-b249-f027ba6a33e2">
+                    <propertyInstance
+                      Id="896d9b71-2ffc-4a96-ac39-6eff87dc2b94"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="84272430-f4e8-42ed-b0fa-08d60c0b0674">
+                    <propertyInstance
+                      Id="6475d4bc-b894-47b6-9e92-c8cb04674227"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="e783335c-ff3a-4a5b-8d80-77fe6652b587">
+                    <propertyInstance
+                      Id="9006abf7-df26-4ec1-9bdf-7083ef471b69"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="17a08697-8dd3-45a1-9a21-1eed631f3ac5">
+                    <propertyInstance
+                      Id="05c7d112-9ea0-45c7-983d-05eeadafab89"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="7be6a7f7-905a-4086-ba6d-606bf582459c"
+        name="EquOperation"
+        visibility="Package"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="2f9676f6-9a35-46dd-9f6b-a5d05ce433b3"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DEquOperation"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="93eb245f-1ef5-4818-b804-c30e282536a1"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="bc49abb1-e1f7-426f-abd3-40b06ca6dd5f">
+                <propertyInstance
+                  Id="ed781522-bf0b-43e8-a97e-7550650e8c02"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="f88a921f-3b27-4ffe-ba2b-7d0d6ae6da96">
+                <propertyInstance
+                  Id="f56aa00c-bdc9-47ff-b62d-a0637303c837"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4953639c-d712-4d9f-bde8-a7b3e6d71188">
+                <propertyInstance
+                  Id="bc2e8e0b-56de-4d6c-bee6-58488bc7f802"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5525854c-6d86-49f3-8713-0139352eb791">
+                <propertyInstance
+                  Id="69ca29e0-716b-42a7-a79f-3c4a936ac948"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="b2d4e33c-b979-40c9-9c9f-482266cafde4">
+                <propertyInstance
+                  Id="0d1996ed-e496-4dff-be2a-ce1b6a04f8b0"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="f70ae939-a187-4a96-abef-ffc4a4696424"
+            isSubstitutable="false">
+            <classMoniker
+              Id="1ca2cba6-8af6-40ff-a913-28e2266643e0"
+              LastKnownName="ExpressionBaseClass"
+              LastKnownLocation="Package4_0001.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="bd003f53-438a-4968-a994-3911e5c7dd5e"
+            name="EquOperation"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="fd9f55d4-8e8a-4043-aac8-1d420bc8814d"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DEquOperation Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="3a68a43b-1831-481c-a610-4ee2c92d7151"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="0a3351d6-f6ae-4b53-aa5b-b4e3f911505a">
+                    <propertyInstance
+                      Id="66a96174-a107-4408-b8c9-897afde27c88"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="6baba096-bdf7-46ad-aee7-a32e57055b94">
+                    <propertyInstance
+                      Id="36d384ca-87e9-46e5-a76c-6646e8696878"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="583de9f3-daa8-46c4-8290-dd766aaff9e7">
+                    <propertyInstance
+                      Id="1c1e5ed6-b4cd-41d4-9ead-edf3a0b07582"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="bbbf3336-42fe-4987-9989-6fe7bce38e48">
+                    <propertyInstance
+                      Id="3acfa81f-e59a-4337-950e-fc3db2ddb177"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="11b43f04-5354-4775-bfde-cb6603a34860">
+                    <propertyInstance
+                      Id="5de26f97-1af9-4261-97c1-dd0f445e3e76"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="12159d8e-33bf-4a18-aa38-290f1041149a">
+                    <propertyInstance
+                      Id="fb2ddd64-79ac-463a-92cd-e55bb72614b2"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="85f54261-f634-4d42-92af-60a5c3c7fc3e"
+        name="RelOperation"
+        visibility="Package"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <referencesInternal>
+          <reference
+            Id="06f60366-de1a-42a7-a0f0-a2b9aa93b8d6"
+            handle="viewcode://./CodeSchema_Class?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DRelOperation"
+            tag="ViewCode" />
+        </referencesInternal>
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="19e7b03f-8b5b-4e07-b5cb-53ea7dbd1f99"
+            name="class"
+            profile="CSharpProfile">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="35ef9f4a-c889-4131-a30f-cfc968204a53">
+                <propertyInstance
+                  Id="c8ffe53b-a718-4cfd-af69-23405a106ca5"
+                  name="ClrAttributes" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="ca3116db-bfa2-4b1b-aa53-3cc4be709d03">
+                <propertyInstance
+                  Id="6cf53bc5-b8c9-4417-a1e3-46f31bfa7ca0"
+                  name="IsPartial"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="5e373bcb-8baf-4e6a-be4d-10378c3be917">
+                <propertyInstance
+                  Id="82863333-9d20-4f6d-b1c4-22a5262a530b"
+                  name="IsStatic"
+                  value="False" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="4d5dc26c-9d8d-477e-96f0-5a1371d24807">
+                <propertyInstance
+                  Id="c25222c2-322e-4416-86a3-2043a6bfbddb"
+                  name="IsUnsafe"
+                  value="false" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="1739d2a3-e0f7-48d8-bff7-a2d3ef31a225">
+                <propertyInstance
+                  Id="3c3b6552-b6b8-4f3d-8aeb-e68dcf047f1a"
+                  name="PackageVisibility"
+                  value="internal" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <generalsInternal>
+          <generalization
+            Id="309f33b8-acc3-4a83-9f55-4b18aa49850e"
+            isSubstitutable="false">
+            <classMoniker
+              Id="1ca2cba6-8af6-40ff-a913-28e2266643e0"
+              LastKnownName="ExpressionBaseClass"
+              LastKnownLocation="Package4_0001.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="fe857f5a-fb0b-4faa-835e-c7f0985e8a7c"
+            name="RelOperation"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <referencesInternal>
+              <reference
+                Id="c204c49d-a807-47bd-a5b1-dc834c81fa7b"
+                handle="viewcode://./CodeSchema_Method?Assembly%3D&quot;file:%2F%2F%2FC:%2FUsers%2FPaulo%2FSkyDrive%2FVisual Studio 2013%2FProjects%2FDecafIde%2FDecafIde%2Fbin%2FDebug%2FDecafIde.exe&quot; Namespace%3DDecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators Type%3DRelOperation Member%3D.ctor"
+                tag="ViewCode" />
+            </referencesInternal>
+            <appliedStereotypesInternal>
+              <stereotypeInstance
+                Id="85d5e06a-475b-4a92-a212-2da417ab261b"
+                name="method"
+                profile="CSharpProfile">
+                <propertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a0c10476-86c1-4d67-b15a-727bca070aad">
+                    <propertyInstance
+                      Id="5a5798c0-7ae5-461d-9b90-9ee440f99e60"
+                      name="ClrAttributes" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="223dd355-2294-4ec2-a729-25397980b4b9">
+                    <propertyInstance
+                      Id="66ad2df3-1f56-4e55-a39f-5119d84f4db5"
+                      name="IsPartial"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="480a28d9-7bd7-4d8f-a661-dfde75cba1e4">
+                    <propertyInstance
+                      Id="a344352d-c882-4d05-8d7d-2661ad7fee66"
+                      name="IsUnsafe"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="a5ece104-374d-47ce-be6e-353170eaabed">
+                    <propertyInstance
+                      Id="2e10ee0c-6f01-470e-8ced-6c5998e10aa5"
+                      name="Inheritance"
+                      value="none" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="d856df3e-ba77-486d-8fc2-7bb8415b43e7">
+                    <propertyInstance
+                      Id="deb65c76-296f-4a78-93a9-0e5d65faa29c"
+                      name="PackageVisibility"
+                      value="internal" />
+                  </stereotypeInstanceHasPropertyInstances>
+                  <stereotypeInstanceHasPropertyInstances
+                    Id="428a6094-556d-4802-a539-076f66fa3f2e">
+                    <propertyInstance
+                      Id="0d17cd4a-6863-4cb9-bf58-601f958f9851"
+                      name="params"
+                      value="false" />
+                  </stereotypeInstanceHasPropertyInstances>
+                </propertyInstances>
+              </stereotypeInstance>
+            </appliedStereotypesInternal>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

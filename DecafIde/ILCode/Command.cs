@@ -1,8 +1,7 @@
 ﻿using Antlr4.StringTemplate;
-using System;
+using DecafIde.ILCode.ClassMembers.MethodMembers;
+using DecafIde.ILCode.ClassMembers.MethodMembers.Statements;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DecafIde.ILCode
 {
@@ -38,13 +37,42 @@ namespace DecafIde.ILCode
         {
             setPlaceholder(theCommand.getInheritedTemplateName(), theCommand.getGenCode());
         }
+
+        public void setCommandList(IEnumerable<LocalVar> theCommandList)
+        {
+            int i = 0;
+            foreach (LocalVar item in theCommandList)
+            {
+                i++;
+                setSingleCommand(item, i);
+            }
+        }
+
+        public void setSingleCommand(LocalVar theCommand, int index)
+        {
+            setPlaceholder(theCommand.getInheritedTemplateName(), "[" + index + "] " + theCommand.getGenCode());
+        }
+
+        public void setCommandList(IEnumerable<ExpressionBaseClass> theCommandList)
+        {
+            foreach (ExpressionBaseClass item in theCommandList)
+            {
+                setSingleCommand(item);
+            }
+        }
+
+        public void setSingleCommand(ExpressionBaseClass theCommand)
+        {
+            setPlaceholder(theCommand.getInheritedTemplateName(), theCommand.PushCode);
+        }
+
         public void setPlaceholder(string fieldName, string fieldValue)
         {
             selfTemplate.Add(fieldName, fieldValue);
         }
         public void setPlaceholder(string fieldName, bool fieldValue)
         {
-            selfTemplate.Add(fieldName, fieldValue?"true":"false");
+            selfTemplate.Add(fieldName, fieldValue ? "true" : "false");
         }
 
         public Command()
