@@ -54,7 +54,6 @@ MainMethod(stackSize, localVar, statements) ::= <<
 	} // end of method Program::Main
 >>
 
-
 TypeName(typeName, isStruct) ::= <<
 	<if(isStruct)>valuetype<endif> <typeName>
 >>
@@ -67,9 +66,15 @@ LocalVar(typeName, id, isArray) ::= <<
 	<typeName><if(isArray)>[]<endif> <id>
 >>
 
-BinaryOp(expression1, expression2, op) ::= <<
-	<expression1>
-	<expression2>
+BinaryOp(expressionOne, expressionTwo, op, requireNot) ::= <<
+	<expressionOne>
+	<expressionTwo>
+	<op>
+	<if(requireNot)>not<endif>
+>>
+
+UnaryOp(expression, op) ::= <<
+	<expression>
 	<op>
 >>
 
@@ -79,30 +84,30 @@ Assignment(loadLocation, expression, storeLocation)  ::= <<
 	<storeLocation>
 >>
 
-IfCmd(expression, code, L0)  ::= <<
+IfCmd(expression, code, Lzero)  ::= <<
 	<expression>
-	brfalse.s <L0>
-	<statements; separator="\n">
-<L0>:
+	brfalse.s <LZero>
+	<code; separator="\n">
+<Lzero>:
 >>
 
-IfElse(condition, ifcode, elsecode, t0, L0, t1, L1)  ::= <<
+IfElse(condition, ifcode, elsecode, LZero, LOne)  ::= <<
 	<condition>
-	brfalse.s <L0>
+	brfalse.s <LZero>
 	<ifcode; separator="\n">
-	br.s <L1>
-<L0>:
+	br.s <LOne>
+<LZero>:
 	<elseCode; separator="\n">
-<L1>:
+<LOne>:
 >>
 
-While(condition, code, L0, L1)  ::= <<
-<L0>:
+While(condition, code, LZero, LOne)  ::= <<
+<LZero>:
 	<condition>
-	brfalse.s <L1>
+	brfalse.s <LOne>
 	<statements; separator="\n">
-	br.s <L0>
-<L1>:
+	br.s <LZero>
+<LOne>:
 >>
 
 Return(expression) ::= <<

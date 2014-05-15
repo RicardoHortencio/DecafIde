@@ -1,9 +1,9 @@
 ﻿
 namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions
 {
-    class LocationStmt : ExpressionBaseClass
+    abstract class LocationStmt : ExpressionBaseClass
     {
-        public string getLoadLocationCode();
-        public string getStoreLocationCode();
+        public abstract string getLoadLocationCode();
+        public abstract string getStoreLocationCode();
     }
 }

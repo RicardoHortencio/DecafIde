@@ -1,7 +1,11 @@
 ﻿
 namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.UnaryOperatos
 {
-    class NotOperator : ExpressionBaseClass
+    class NotOperator : UnaryOperation
     {
+        public override string getOperatorCommand()
+        {
+            return "not";
+        }
     }
 }

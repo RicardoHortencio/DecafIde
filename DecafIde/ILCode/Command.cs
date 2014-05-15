@@ -53,7 +53,7 @@ namespace DecafIde.ILCode
             setPlaceholder(theCommand.getInheritedTemplateName(), "[" + index + "] " + theCommand.getGenCode());
         }
 
-        public void setCommandList(IEnumerable<ExpressionBaseClass> theCommandList)
+        public void setCommandList(string fieldName, IEnumerable<ExpressionBaseClass> theCommandList)
         {
             foreach (ExpressionBaseClass item in theCommandList)
             {
@@ -61,7 +61,7 @@ namespace DecafIde.ILCode
             }
         }
 
-        public void setSingleCommand(ExpressionBaseClass theCommand)
+        public void setSingleCommand(string fieldName, ExpressionBaseClass theCommand)
         {
             setPlaceholder(theCommand.getInheritedTemplateName(), theCommand.PushCode);
         }

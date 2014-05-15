@@ -1,7 +1,7 @@
 ﻿
 namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions
 {
-    class BinaryOperation : ExpressionBaseClass
+    abstract class BinaryOperation : ExpressionBaseClass
     {
         ExpressionBaseClass exp1;
         ExpressionBaseClass exp2;
@@ -26,9 +26,13 @@ namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions
 
         public override void setGenCode()
         {
-            setSingleCommand(exp1);
-            setSingleCommand(exp2);
+            setSingleCommand("expressionOne", exp1);
+            setSingleCommand("expressionTwo", exp2);
             setPlaceholder("op", operation.getOperatorCommand());
+            if (operation is BooleanExpression)
+            {
+                setPlaceholder("requireNot", (operation as BooleanExpression).RequireNot());
+            }
         }
     }
 }

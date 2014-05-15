@@ -85,10 +85,11 @@
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\ExpressionBaseClass.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperation.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperator.cs" />
-    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\ArtihOperations.cs" />
-    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\BolOperation.cs" />
-    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\EquOperation.cs" />
-    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\RelOperation.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\ArithOp.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\CondOp.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\EqOp.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BinaryOperators\RelOp.cs" />
+    <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\BooleanExpression.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\LocationStmt.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperation.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Statements\Expressions\UnaryOperatos\NegOperator.cs" />
