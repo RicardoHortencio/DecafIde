@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DecafIde.Semantic_Analysis
 {
@@ -11,12 +10,22 @@ namespace DecafIde.Semantic_Analysis
     /// </summary>
     class SymbolTable
     {
+        private SymbolTable parentScope;
         private Dictionary<string, Symbol> theVariableTable;
         private Dictionary<string, Symbol> theMethodTable;
         private Dictionary<string, Symbol> theStructDeclTable;
 
         public SymbolTable()
         {
+            parentScope = null;
+            theVariableTable = new Dictionary<string, Symbol>();
+            theMethodTable = new Dictionary<string, Symbol>();
+            theStructDeclTable = new Dictionary<string, Symbol>();
+        }
+
+        public SymbolTable(SymbolTable theParentScope)
+        {
+            parentScope = theParentScope;
             theVariableTable = new Dictionary<string, Symbol>();
             theMethodTable = new Dictionary<string, Symbol>();
             theStructDeclTable = new Dictionary<string, Symbol>();
@@ -65,7 +74,8 @@ namespace DecafIde.Semantic_Analysis
                         if (!typedSymbol.checkParameterList(theParameteredList))
                             typedSymbol.addParameterList(theParameteredList);
                         else
-                            throw new Exception("Redeclared identifier " + name + " on symbol declaration"+Environment.NewLine);                    }
+                            throw new Exception("Redeclared identifier " + name + " on symbol declaration" + Environment.NewLine);
+                    }
                     break;
                 case symbolCategory.CstructDecl:
                     theStructDeclTable.Add(name, theSymbol);
@@ -84,7 +94,7 @@ namespace DecafIde.Semantic_Analysis
         /// <param name="theCategory">The category that you should try to find it into</param>
         /// <returns>True if the symbol is found, false otherwise.</returns>
         public bool CheckSymbol(string id, symbolCategory theCategory)
-        { 
+        {
             switch (theCategory)
             {
                 case symbolCategory.Cvariable:
@@ -140,6 +150,11 @@ namespace DecafIde.Semantic_Analysis
             Symbol tempSymbol = FindSymbol(id, theCategory);
             if (tempSymbol != null) return tempSymbol.Type;
             else return null;
+        }
+
+        public SymbolTable getEnclosingScope()
+        {
+            return parentScope;
         }
     }
 }

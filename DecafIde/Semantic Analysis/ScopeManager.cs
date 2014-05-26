@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 namespace DecafIde.Semantic_Analysis
 {
     /// <summary>
@@ -12,7 +10,7 @@ namespace DecafIde.Semantic_Analysis
         /// <summary>
         /// Store for the symbol tables
         /// </summary>
-        Stack<SymbolTable> theStack;
+        SymbolTable currentScope;
         /// <summary>
         /// Stores the current return value Type
         /// </summary>
@@ -49,13 +47,19 @@ namespace DecafIde.Semantic_Analysis
             }
         }
 
+        internal SymbolTable GetEnclosingScope()
+        {
+            return currentScope.getEnclosingScope();
+        }
+
         /// <summary>
         /// Gets and pops the current scope
         /// </summary>
         /// <returns>The current scope</returns>
         internal SymbolTable GetAndExitScope()
         {
-            return theStack.Pop();
+            currentScope = currentScope.getEnclosingScope();
+            return currentScope;
         }
 
         /// <summary>
@@ -63,7 +67,15 @@ namespace DecafIde.Semantic_Analysis
         /// </summary>
         public ScopeManager()
         {
-            theStack = new Stack<SymbolTable>();
+            currentScope = new SymbolTable();
+        }
+
+        /// <summary>
+        /// Initializes a new scopemanager instance
+        /// </summary>
+        public ScopeManager(SymbolTable theCurrentScope)
+        {
+            currentScope = theCurrentScope;
         }
 
         /// <summary>
@@ -71,7 +83,7 @@ namespace DecafIde.Semantic_Analysis
         /// </summary>
         internal void EnterScope()
         {
-            theStack.Push(new SymbolTable());
+            currentScope = new SymbolTable(currentScope);
         }
 
         /// <summary>
@@ -84,7 +96,7 @@ namespace DecafIde.Semantic_Analysis
         {
             Symbol result = null;
 
-            result = theStack.Peek().FindSymbol(id, theCategory);
+            result = currentScope.FindSymbol(id, theCategory);
             return result;
         }
 
@@ -96,26 +108,33 @@ namespace DecafIde.Semantic_Analysis
         /// <returns></returns>
         public Symbol FindSymbol(string id, symbolCategory theCategory)
         {
-            Symbol result = null;
-            Boolean symbolFound = false;
-            Stack<SymbolTable> tempStack = new Stack<SymbolTable>();
+            Symbol s = currentScope.FindSymbol(id, theCategory);
+            if (s != null) return s;
+            if (currentScope.getEnclosingScope() != null)
+                return currentScope.getEnclosingScope().FindSymbol(id, theCategory);
 
-            while ((!symbolFound) && (theStack.Count > 0))
-            {
-                result = theStack.Peek().FindSymbol(id, theCategory);
-                symbolFound = result != null;
-                if (!symbolFound) tempStack.Push(theStack.Pop());
-            }
+            return null;
+
+            //Symbol result = null;
+            //Boolean symbolFound = false;
+            //Stack<SymbolTable> tempStack = new Stack<SymbolTable>();
+
+            //while ((!symbolFound) && (currentScope.Count > 0))
+            //{
+            //    result = currentScope.Peek().FindSymbol(id, theCategory);
+            //    symbolFound = result != null;
+            //    if (!symbolFound) tempStack.Push(currentScope.Pop());
+            //}
 
 
-            if (theStack.Count <= 0) throw new
-            Exception("Symbol " + id + " not found in symbolTable.");
-            while (tempStack.Count > 0)
-                theStack.Push(tempStack.Pop());
+            //if (currentScope.Count <= 0) throw new
+            //Exception("Symbol " + id + " not found in symbolTable.");
+            //while (tempStack.Count > 0)
+            //    currentScope.Push(tempStack.Pop());
 
 
 
-            return result;
+            //return result;
         }
 
         /// <summary>
@@ -125,7 +144,7 @@ namespace DecafIde.Semantic_Analysis
         /// <param name="x">The new symbol instance</param>
         public void AddSymbol(string id, Symbol x)
         {
-            theStack.Peek().Add(id, x);
+            currentScope.Add(id, x);
         }
 
         /// <summary>
@@ -134,7 +153,7 @@ namespace DecafIde.Semantic_Analysis
         /// <param name="thePair">The keyValuePair valu</param>
         public void AddSymbol(KeyValuePair<string, Symbol> thePair)
         {
-            theStack.Peek().Add(thePair);
+            currentScope.Add(thePair);
         }
 
         /// <summary>
@@ -145,19 +164,26 @@ namespace DecafIde.Semantic_Analysis
         /// <returns></returns>
         internal bool CheckScope(string id, symbolCategory theCategory)
         {
-            Boolean symbolFound = false;
-            Stack<SymbolTable> tempStack = new Stack<SymbolTable>();
+            bool symbolInScope = currentScope.CheckSymbol(id, theCategory);
+            if (symbolInScope) return symbolInScope;
+            if (currentScope.getEnclosingScope() != null)
+                return currentScope.getEnclosingScope().CheckSymbol(id, theCategory);
 
-            while ((!symbolFound) && (theStack.Count > 0))
-            {
-                symbolFound = theStack.Peek().CheckSymbol(id, theCategory);
-                if (!symbolFound) tempStack.Push(theStack.Pop());
-            }
+            return false;
 
-            while (tempStack.Count > 0)
-                theStack.Push(tempStack.Pop());
+            //Boolean symbolFound = false;
+            //Stack<SymbolTable> tempStack = new Stack<SymbolTable>();
 
-            return symbolFound;
+            //while ((!symbolFound) && (currentScope.Count > 0))
+            //{
+            //    symbolFound = currentScope.Peek().CheckSymbol(id, theCategory);
+            //    if (!symbolFound) tempStack.Push(currentScope.Pop());
+            //}
+
+            //while (tempStack.Count > 0)
+            //    currentScope.Push(tempStack.Pop());
+
+            //return symbolFound;
         }
 
         /// <summary>
@@ -165,7 +191,8 @@ namespace DecafIde.Semantic_Analysis
         /// </summary>
         internal SymbolTable ExitScope()
         {
-            return theStack.Pop();
+            currentScope = currentScope.getEnclosingScope();
+            return currentScope;
         }
 
         /// <summary>
@@ -174,7 +201,7 @@ namespace DecafIde.Semantic_Analysis
         /// <param name="theTable"></param>
         internal void PushSymbolTable(SymbolTable theTable)
         {
-            theStack.Push(theTable);
+            currentScope = new SymbolTable(theTable);
         }
     }
 }

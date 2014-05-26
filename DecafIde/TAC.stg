@@ -6,15 +6,37 @@
 
 group TAC;
 
-Main(structDec, field, method) ::= <<
+Main(structDec, field, mainMethod, method, arrayFieldInit) ::= <<
+	.assembly extern mscorlib
+	{}
 
-	.class Program
+	.assembly MyApp
+	{}
+
+	.class private auto ansi beforefieldinit Program
 	{
 		<structDec; separator="\n">
 		<field; separator="\n">
 		<mainMethod; separator="\n">
 		<method; separator="\n">
+
+		.method public hidebysig specialname rtspecialname
+		instance void  .ctor() cil managed
+		{
+		  .maxstack  8
+		  <arrayFieldInit; separator="\n">
+		  ldarg.0
+		  call       instance void [mscorlib]System.Object::.ctor()
+		  ret
+		}
 	}
+>>
+
+ArrayFieldInit(name, size, type) ::= <<
+  ldarg.0
+  ldc.i4.s   <size>
+  newarr     <type>
+  stfld      <name>
 >>
 
 StructDec(name, structDec, field) ::= <<
@@ -41,8 +63,8 @@ Method(typeName, id, parameters, stackSize, localVar, statements) ::= <<
   >>
 
 MainMethod(stackSize, localVar, statements) ::= <<
-	.method private static void
-	Main(string[] y)
+	.method hidebysig private static void
+	Main(string[] y) cil managed
 	{
 		  .entrypoint
 		  .maxstack <stackSize>

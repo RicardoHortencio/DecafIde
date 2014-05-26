@@ -1,6 +1,9 @@
 ﻿
 namespace DecafIde.ILCode
 {
+    /// <summary>
+    /// Gets the MSIL type mapping
+    /// </summary>
     static class TypeMapper
     {
         public static string getMappedType(string type)

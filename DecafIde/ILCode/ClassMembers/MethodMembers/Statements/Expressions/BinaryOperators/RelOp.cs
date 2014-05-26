@@ -35,7 +35,7 @@ namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.Bina
             }
         }
 
-        public override string getOperatorCommand()
+        public string getOperatorCommand()
         {
             switch (CurrentOperation)
             {

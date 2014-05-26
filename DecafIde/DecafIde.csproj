@@ -75,6 +75,7 @@
     <Compile Include="HelperClasses\TypeHelper.cs" />
     <Compile Include="ILCode\ClassMembers\FieldDeclaration.cs" />
     <Compile Include="ILCode\ClassMembers\MainMethod.cs" />
+    <Compile Include="ILCode\ClassMembers\ArrayDeclaration.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\LocalVar.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\Parameter.cs" />
     <Compile Include="ILCode\ClassMembers\MethodMembers\StatementBaseClass.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="NewDecaf.g4.parser.cs">
       <DependentUpon>NewDecaf.g4</DependentUpon>
     </Compile>
+    <Compile Include="NewDecafCodeGenerator.cs" />
     <Compile Include="ParsingErrorDetector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,7 +156,6 @@
       <Generator>MSBuild:Compile</Generator>
       <CustomToolNamespace>DecafIde</CustomToolNamespace>
     </Antlr4>
-    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

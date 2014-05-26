@@ -1,11 +1,16 @@
-﻿
-namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions
+﻿namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions
 {
     abstract class BinaryOperation : ExpressionBaseClass
     {
         ExpressionBaseClass exp1;
         ExpressionBaseClass exp2;
         BinaryOperator operation;
+
+        internal BinaryOperator Operation
+        {
+            get { return operation; }
+            set { operation = value; }
+        }
 
         internal ExpressionBaseClass Exp2
         {

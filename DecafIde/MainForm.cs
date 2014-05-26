@@ -12,6 +12,7 @@ using System.IO;
 using Irony.Parsing;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
+using DecafIde.Semantic_Analysis;
 
 
 namespace DecafIde
@@ -90,6 +91,7 @@ namespace DecafIde
             ParseTreeWalker walker = new ParseTreeWalker();
             
             SymbolTableConstructor theConstructor = new SymbolTableConstructor();
+            SymbolTable finalTable = theConstructor.finalTable; 
 
             string generated = "";
             ILGenerator theGenerator = new ILGenerator(generated);

@@ -10,6 +10,7 @@ namespace DecafIde.ILCode
         List<FieldDeclaration> fieldDeclList = new List<FieldDeclaration>();
         List<MethodDeclaration> methodDeclList = new List<MethodDeclaration>();
         MainMethod mainMethod = new MainMethod();
+        List<ArrayDeclaration> arrayDeclList = new List<ArrayDeclaration>();
 
         internal MainMethod MainMethod
         {
@@ -27,15 +28,14 @@ namespace DecafIde.ILCode
             setCommandList(fieldDeclList);
             setSingleCommand(mainMethod);
             setCommandList(methodDeclList);
-
-            //UNDONE ConstructorImplementation
+            setCommandList(arrayDeclList);
         }
 
         public void addCommand(StructDeclaration theCommand)
         {
             structDeclList.Add(theCommand);
         }
-        public void addComand(FieldDeclaration theCommand)
+        public void addCommand(FieldDeclaration theCommand)
         {
             fieldDeclList.Add(theCommand);
         }
@@ -48,16 +48,22 @@ namespace DecafIde.ILCode
             mainMethod = theCommand;
         }
 
+        public void addCommand(ArrayDeclaration theCommand)
+        {
+            arrayDeclList.Add(theCommand);
+        }
+
         public MainClass() : base() { }
 
         public MainClass(List<StructDeclaration> theStructDeclList,
             List<FieldDeclaration> theFieldDeclList,
-            List<MethodDeclaration> theMethodDeclList)
+            List<MethodDeclaration> theMethodDeclList, List<ArrayDeclaration> theArrayDeclList)
             : this()
         {
             structDeclList = theStructDeclList;
             fieldDeclList = theFieldDeclList;
             methodDeclList = theMethodDeclList;
+            arrayDeclList = theArrayDeclList;
         }
     }
 }

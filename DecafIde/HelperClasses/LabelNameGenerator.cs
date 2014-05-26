@@ -11,7 +11,7 @@ namespace DecafIde.HelperClasses
         /// Gets a label name with an optional given Suffix
         /// </summary>
         /// <param name="suffix"></param>
-        /// <returns></returns>
+        /// <returns>an unique label name</returns>
         public static string getLabelName(string suffix = "")
         {
             return "label" + suffix + (labelCounter++).ToString();

@@ -1,5 +1,4 @@
-﻿
-using DecafIde.HelperClasses;
+﻿using DecafIde.HelperClasses;
 using System.Collections.Generic;
 namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.ControlStructures
 {
@@ -12,6 +11,7 @@ namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.ControlStructure
             get { return theCondition; }
             set { theCondition = value; }
         }
+
         string labelName = LabelNameGenerator.getLabelName("if");
         List<StatementBaseClass> code;
 

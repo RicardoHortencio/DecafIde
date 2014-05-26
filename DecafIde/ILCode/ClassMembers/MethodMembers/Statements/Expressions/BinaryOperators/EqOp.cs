@@ -1,5 +1,4 @@
-﻿
-namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators
+﻿namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators
 {
     public enum EqualityOperators
     {
@@ -15,14 +14,15 @@ namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.Bina
             get { return currentOperation; }
             set { currentOperation = value; }
         }
-        public override string getOperatorCommand()
-        {
-            return "ceq";
-        }
 
         public bool RequireNot()
         {
             return currentOperation == EqualityOperators.notEqual;
+        }
+
+        public string getOperatorCommand()
+        {
+            return "ceq";
         }
     }
 }

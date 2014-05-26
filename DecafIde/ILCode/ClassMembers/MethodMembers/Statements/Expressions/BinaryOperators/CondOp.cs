@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.BinaryOperators
 {
     public enum ConditionalOperators
@@ -17,7 +16,8 @@ namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.Expressions.Bina
             get { return currentOperation; }
             set { currentOperation = value; }
         }
-        public override string getOperatorCommand()
+
+        public string getOperatorCommand()
         {
             switch (CurrentOperation)
             {

@@ -1,17 +1,16 @@
-﻿using Antlr4.Runtime.Tree;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Antlr4.Runtime;
+using Antlr4.Runtime.Tree;
+using DecafIde.HelperClasses;
 using DecafIde.Semantic_Analysis;
 using DecafIde.Semantic_Analysis.ExtendedSymbols;
-using DecafIde.HelperClasses;
-using Antlr4.Runtime;
+using System;
+using System.Collections.Generic;
 
 namespace DecafIde
 {
     public class SymbolTableConstructor : DecafBaseListener
     {
+        public SymbolTable finalTable;
         ScopeManager theScopeManager = new ScopeManager();
 
         List<SymbolType> parameterList = new List<SymbolType>();
@@ -441,7 +440,7 @@ namespace DecafIde
                 StructDeclSymbol typedParent = theScopeManager.FindSymbol(structDecName, symbolCategory.CstructDecl) as StructDeclSymbol;
                 theScopeManager.PushSymbolTable(typedParent.Members);
                 setNodeType(context, getNodeType(context.location()));
-                if (getNodeValue(context.expression())>0)
+                if (getNodeValue(context.expression()) > 0)
                 {
                     if (getNodeValue(context.expression()) > typedSymbol.length)
                     {

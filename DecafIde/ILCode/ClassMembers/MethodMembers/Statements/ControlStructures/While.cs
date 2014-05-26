@@ -1,5 +1,4 @@
-﻿
-using DecafIde.HelperClasses;
+﻿using DecafIde.HelperClasses;
 using System.Collections.Generic;
 namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.ControlStructures
 {
@@ -15,7 +14,7 @@ namespace DecafIde.ILCode.ClassMembers.MethodMembers.Statements.ControlStructure
         string labelName = LabelNameGenerator.getLabelName("loop");
         string endLabelName = LabelNameGenerator.getLabelName("endWhile");
 
-        List<StatementBaseClass> code;
+        List<StatementBaseClass> code = new List<StatementBaseClass>();
 
         public override string getTemplateName()
         {
