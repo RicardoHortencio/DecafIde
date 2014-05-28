@@ -1,5 +1,5 @@
 ﻿
-namespace DecafIde.ILCode
+namespace DecafIde.HelperClasses
 {
     /// <summary>
     /// Gets the MSIL type mapping

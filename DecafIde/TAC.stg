@@ -141,19 +141,3 @@ MethodCall(methodType, methodName, parameterType, expression) ::= <<
 	<expression; separator =";">
 	call instance <methodType> Program::'<methodName>'(<parameterType; separator =",">)
 >>
-
-VarDecl(id, type) ::= <<
-	Load<type> <id>
->>
-
-VarStructDecl(id, type) ::= <<
-	LoadStruct <id>
-	LoadStructName <type>
->>
-
-ArrayDecl(varloading, position) ::= <<
-{
-	<varloading>
-	LoadPosition <position>
-}
->>

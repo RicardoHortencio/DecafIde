@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace DecafIde.LipBased
 {
     public enum SymbolType
@@ -11,7 +7,8 @@ namespace DecafIde.LipBased
         Tboolean,
         Tchar,
         Tint,
-        Tvoid
+        Tvoid,
+        Tinvalid
     }
     class SymbolTable
     {

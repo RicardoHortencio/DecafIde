@@ -4,34 +4,30 @@ grammar NewDecaf;
  * Parser Rules
  */
 
-program 
-	:	'class' Id '{' (declaration)* '}'									//ya
-	;
-
-declaration 
-	:	structDeclaration 
+program
+	:	'class' Id '{' (structDeclaration
 	|	varDeclaration
 	|	methodDeclaration
-	|	mainMethodDeclaration
-	;	
-	 
-varDeclaration 
-	:	varType Id ';'														#single_varDeclaration		//ya
-	|	varType Id '[' Num ']' ';'											#array_varDeclaration   //ya
-	;	
+	|	mainMethodDeclaration)* '}'									//ya
+	;
 
-structVarDeclaration 
-	:	varType Id ';'														#single_structVarDeclaration	//ya	
-	|	varType Id '[' Num ']' ';'											#array_structVarDeclaration		//ya
+varDeclaration
+	:	varType Id ';'														#single_varDeclaration //ya
+	|	varType Id '[' Num ']' ';'											#array_varDeclaration //ya
+	;
+
+structVarDeclaration
+	:	varType Id ';'														#single_structVarDeclaration //pending
+	|	varType Id '[' Num ']' ';'											#array_structVarDeclaration //pending
 	;
 
 structDeclaration
-	:	'struct' Id '{' (structVarDeclaration)* '}'							//ya
+	:	'struct' Id '{' (structVarDeclaration)* '}'							//pending
 	;
 
-blockVarDeclaration 
-	:	varType Id ';'														#single_blockVarDeclaration
-	|	varType Id '[' Num ']' ';'											#array_blockVarDeclaration
+blockVarDeclaration
+	:	varType Id ';'														#single_blockVarDeclaration //pending
+	|	varType Id '[' Num ']' ';'											#array_blockVarDeclaration //pending
 	;
 
 varType
@@ -44,78 +40,82 @@ varType
 	;
 
 mainMethodDeclaration
-	:	methodType 'main' '(' (parameter (',' parameter)*)? ')'  block		//ya
+	:	mainMethodSignature block											//no implementado
+	;
+
+mainMethodSignature
+	:	methodType 'main' '(' (parameter (',' parameter)*)? ')'				//pending
 	;
 
 methodDeclaration
-	:	methodSignature block
+	:	methodSignature block												//no implementado
 	;
 
 methodSignature
-	: methodType Id '(' (parameter (',' parameter)*)? ')'					//ya
+	: methodType Id '(' (parameter (',' parameter)*)? ')'					//pending
 	;
 
-methodType 																	//ya
-	:	'int'		
-	|	'char'		
+methodType
+	:	'int'
+	|	'char'
 	|	'boolean'
-	|	'void'		
+	|	'void'
 	;
 
-parameter														
-	:	parameterType Id		 #single_parameterDeclaration				//ya
+parameter
+	:	parameterType Id		 #single_parameterDeclaration				//pending
 	;
 
-parameterType																//ya
-	:	'int'		
-	|	'char'		
-	|	'boolean'	
+parameterType
+	:	'int'
+	|	'char'
+	|	'boolean'
 	;
 
 block
-	:	'{' (blockVarDeclaration)* (statement)* '}' 
+	:	'{' (blockVarDeclaration)* (statement)* '}'							//pending
 	;
 
 ifBlock
-	:	'{' (blockVarDeclaration)* (statement)* '}' 
+	:	'{' (blockVarDeclaration)* (statement)* '}'
 	;
 
 elseBlock
-	:	'{' (blockVarDeclaration)* (statement)* '}' 
+	:	'{' (blockVarDeclaration)* (statement)* '}'
 	;
 
 whileBlock
-	:	'{' (blockVarDeclaration)* (statement)* '}' 
+	:	'{' (blockVarDeclaration)* (statement)* '}'
 	;
 
 statementBlock
-	:	'{' (blockVarDeclaration)* (statement)* '}' 
+	:	'{' (blockVarDeclaration)* (statement)* '}'
 	;
 
 	//**************************************** FALTA *******************/
 statement
-	:	'if' '(' expression ')' ifBlock 'else' elseBlock					#if_else_statement // ya
-	|	'if' '(' expression ')' ifBlock										#if_statement // ya
-	|	'while' '(' expression ')' whileBlock								#while_statement //ya
-	|	'return' (expression)? ';'											#return_statement  //ya
-	|	methodCall ';'														#method_statement  // no se implementa
-	|	statementBlock														#block_statement // no se implementa
-	|	location '=' expression ';'											#assign_statement // no se implementa
-	|	location '=' '(char)' expression ';'								#char_assign_statement //ya
-	|	(expression)? ';'													#expression_statement //ya
+	:	'if' '(' expression ')' ifBlock 'else' elseBlock					#if_else_statement
+	|	'if' '(' expression ')' ifBlock										#if_statement
+	|	'while' '(' expression ')' whileBlock								#while_statement
+	|	'return' (expression)? ';'											#return_statement
+	|	methodCall ';'														#method_statement
+	|	statementBlock														#block_statement
+	|	location '=' expression ';'											#assign_statement
+	|	location '=' '(char)' expression ';'								#char_assign_statement
+	|	(expression)? ';'													#expression_statement
 	;
 
 locationList
 	:	location ('.' location)*
 	;
 
-location  
+location
 	:	Id (locationList)? 													#single_location
 	|	Id '[' expression ']' (locationList)?								#array_location
 	;
 	// ******************** FALTA ************************/
 
-expression  //ya
+expression  //pending
 	:	location															#var_location_expression
 	|	methodCall															#methodCall_expression
 	|	Num																	#int_literal_expression
@@ -131,13 +131,13 @@ expression  //ya
 	;
 
 methodCall
-	:	Id '(' (arg (',' arg)*)? ')' //ya
+	:	Id '(' (arg (',' arg)*)? ')'
 	;
 
 arg
-	: expression //ya
+	: expression
 	;
-	
+
 arith_op
 	:	'+'
 	|	'-'
@@ -162,8 +162,8 @@ cond_op
 	:	'&&'
 	|	'||'
 	;
-	
-bool_literal //ya
+
+bool_literal
 	:	'true'
 	|	'false'
 	;
@@ -185,7 +185,7 @@ SingleCharacter
 	:	~['\\]
 	;
 
-Digit 
+Digit
 	:	[0-9]
 	;
 
@@ -193,8 +193,9 @@ Letter
 	:	[a-zA-Z]
 	;
 
-WS  :	[  \t\r\n\u000C]+ -> skip ;
- 
+WS
+	:	[  \t\r\n\u000C]+ -> skip ;
+
 COMMENT
 	:	'/*' .*? '*/' -> skip
 	;

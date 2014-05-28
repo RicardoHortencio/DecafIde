@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace DecafIde.LipBased
 {
-    class GlobalScope: BaseScope
+    class GlobalScope : BaseScope
     {
         public GlobalScope()
             : base(null)
         { }
+        public GlobalScope(IScope enclosingScope)
+            : base(enclosingScope)
+        { }
 
         public string getScopeName()
         {
-            return "global";
+            return "globals";
         }
     }
 }

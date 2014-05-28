@@ -71,6 +71,7 @@
     <Compile Include="Decaf.g4.parser.cs">
       <DependentUpon>Decaf.g4</DependentUpon>
     </Compile>
+    <Compile Include="DefPhase.cs" />
     <Compile Include="HelperClasses\LabelNameGenerator.cs" />
     <Compile Include="HelperClasses\TypeHelper.cs" />
     <Compile Include="ILCode\ClassMembers\FieldDeclaration.cs" />
@@ -104,6 +105,19 @@
     <Compile Include="HelperClasses\TypeMapper.cs" />
     <Compile Include="ILCode\VarType.cs" />
     <Compile Include="ILGenerator.cs" />
+    <Compile Include="LipBased\BaseClasses\ArrayType.cs" />
+    <Compile Include="LipBased\BaseClasses\BaseScope.cs" />
+    <Compile Include="LipBased\BaseClasses\BuiltInTypeSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\GlobalScope.cs" />
+    <Compile Include="LipBased\BaseClasses\IScope.cs" />
+    <Compile Include="LipBased\BaseClasses\IType.cs" />
+    <Compile Include="LipBased\BaseClasses\LocalScope.cs" />
+    <Compile Include="LipBased\BaseClasses\MethodSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\ScopedSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\StructSymbol.cs" />
+    <Compile Include="LipBased\BaseClasses\Symbol.cs" />
+    <Compile Include="LipBased\BaseClasses\SymbolTable.cs" />
+    <Compile Include="LipBased\BaseClasses\VariableSymbol.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +142,7 @@
     <Compile Include="Semantic Analysis\SymbolTable.cs" />
     <Compile Include="Semantic Analysis\Symbol.cs" />
     <Compile Include="Semantic Analysis\ScopeManager.cs" />
+    <Compile Include="STBasedGenerator.cs" />
     <Compile Include="stringtemplateTryout.cs" />
     <Compile Include="SymbolTableConstructor.cs" />
     <Compile Include="TreeConstructingVisitor.cs" />
