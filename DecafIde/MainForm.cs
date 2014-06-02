@@ -101,13 +101,13 @@ namespace DecafIde
             //ILGenerator theGenerator = new ILGenerator(generated);
 
             DefPhase theDefinition = new DefPhase();
-            STBasedGenerator newGenreator = new STBasedGenerator(theDefinition.scopes);
             //try
             //{
             // walker2.Walk(theGenerator, AbstractSyntaxTree2);
             //walker.Walk(theConstructor, AbstractSyntaxTree);
             walker3.Walk(theDefinition, AbstractSyntaxTree3);
-            walker4.Walk(newGenreator, AbstractSyntaxTree4);
+            STBasedGenerator newGenreator = new STBasedGenerator(theDefinition.scopes);
+            walker3.Walk(newGenreator, AbstractSyntaxTree3);
 
             string code = newGenreator.mainTemplate.Render();
             //}
@@ -121,6 +121,16 @@ namespace DecafIde
             //}
             if (errorTB.Text == string.Empty)
                 errorTB.Text = "Congrats! No errors were found!";
+
+            FileStream myStream;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter outfile = new StreamWriter(saveFileDialog1.FileName))
+                {
+                    outfile.Write(code);
+                }
+            }
 
             MessageBox.Show(code);
         }

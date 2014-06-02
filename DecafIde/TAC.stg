@@ -60,19 +60,20 @@ Field(typeName, id, isArray) ::= <<
 	.field public <typeName><if(isArray)>[]<endif> <id>program
 >>
 
-MethodSignature(typeName, id, parameters, stackSize, localVar, statements) ::= <<
-.method public hidebysig instance <typeName> '<id>'(<parameters; separator=", ">) cil managed
+MethodSignature(typeName, id, parameters) ::= <<
+.method public hidebysig static <typeName> <id>(<parameters; separator=", ">) cil managed
 >>
 
-Method(typeName, id, parameters, stackSize, localVar, statements) ::= <<
+Method(methodSignature, localVar, arrayInit, statements) ::= <<
   <methodSignature>
   {
-	.maxstack 32
+	.maxstack 8
 	.locals init (
 		<localVar; separator=", ">
 	)
 	<arrayInit; separator="\n">
 	<statements; separator="\n">
+	ret
   } // end of method Program::'<id>'
   >>
 
@@ -80,18 +81,18 @@ BaseBlock(statements) ::= <<
 	<statements; separator="\n">
 >>
 
-MainMethod(stackSize, localVar, statements) ::= <<
+MainMethod(arrayInit, localVar, statements) ::= <<
 	.method hidebysig private static void
 	Main(string[] y) cil managed
 	{
 		  .entrypoint
-		  .maxstack 32
-		  .locals (
+		  .maxstack 8
+		  .locals init(
 			  <localVar; separator=", ">
 		  )
 		  <arrayInit; separator="\n">
 		  <statements; separator="\n">
-
+		  ret
 	} // end of method Program::Main
 >>
 
@@ -107,7 +108,7 @@ LocalVar(typeName, id, isArray) ::= <<
 	<typeName><if(isArray)>[]<endif> <id>
 >>
 
-BinaryOp(expressionOne, expressionTwo, op, requireNot) ::= <<
+BinaryOp(left, right, op, requireNot) ::= <<
 	<left>
 	<right>
 	<op>
@@ -120,30 +121,38 @@ UnaryOp(expression, op) ::= <<
 >>
 
 
-IfCmd(expression, code, Lzero)  ::= <<
+IfCmd(expression, code, LTrue, LFalse)  ::= <<
 	<expression>
-	brfalse.s <LZero>
+<LTrue>:
 	<code; separator="\n">
-<Lzero>:
+<LFalse>:
 >>
 
-IfElse(condition, ifcode, elsecode, LZero, LOne)  ::= <<
-	<condition>
-	brfalse.s <LZero>
+IfElse(expression, ifcode, elseCode, LTrue, LFalse, LEnd)  ::= <<
+	<expression>
+<LTrue>:
 	<ifcode; separator="\n">
-	br.s <LOne>
-<LZero>:
+	br.s <LEnd>
+<LFalse>:
 	<elseCode; separator="\n">
-<LOne>:
+<LEnd>:
+	nop
 >>
 
-While(condition, code, LZero, LOne)  ::= <<
-<LZero>:
-	<condition>
-	brfalse.s <LOne>
-	<statements; separator="\n">
-	br.s <LZero>
-<LOne>:
+While(expression, code, LBegin, LTrue, LFalse)  ::= <<
+<LBegin>:
+	<expression>
+<LTrue>:
+	<code; separator="\n">
+	br.s <LBegin>
+<LFalse>:
+>>
+
+Relop(left, right, brop, LTrue, LFalse) ::= <<
+	<left>
+	<right>
+	<brop> <LTrue>
+	br.s <LFalse>
 >>
 
 Return(expression) ::= <<
@@ -153,15 +162,15 @@ Return(expression) ::= <<
 
 MethodCall(methodType, methodName, parameterType, expression) ::= <<
 	<expression; separator =";">
-	call instance <methodType> Program::'<methodName>'(<parameterType; separator =",">)
+	call <methodType> Program::<methodName>(<parameterType; separator =",">)
 >>
 
-Expression(anythi) ::= <<
-	<anythi; separator =";">
+Expression(code) ::= <<
+	<code; separator =";">
 >>
 
 LoadIntConstant(constant) ::= <<
-	ldc.i4.<constant>
+	ldc.i4.s <constant>
 >>
 
 Assignment(local, expression) ::= <<
@@ -175,4 +184,9 @@ LoadParameter(parameter) ::= <<
 
 Operation(op) ::= <<
 	<op>
+>>
+CondOp(left, right, LeftLabel) ::= <<
+	<left>
+<LeftLabel>:
+	<right>
 >>

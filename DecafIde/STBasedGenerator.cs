@@ -7,12 +7,16 @@ namespace DecafIde
 {
     class STBasedGenerator : NewDecafBaseListener
     {
+        IScope currentScope;
         static TemplateGroup stg = new TemplateGroupFile(@"C:\Users\Paulo\SkyDrive\Visual Studio 2013\Projects\DecafIde\DecafIde\TAC.stg");
         public Template mainTemplate = stg.GetInstanceOf("Main");
 
         ParseTreeProperty<Template> nodeTemplate = new ParseTreeProperty<Template>();
         ParseTreeProperty<Template> nodeInitTemplate = new ParseTreeProperty<Template>();
         ParseTreeProperty<bool> nodeRequiresInit = new ParseTreeProperty<bool>();
+        ParseTreeProperty<string> nodeTrueLabel = new ParseTreeProperty<string>();
+        ParseTreeProperty<string> nodeFalseLabel = new ParseTreeProperty<string>();
+
 
         ParseTreeProperty<IScope> scopes = new ParseTreeProperty<IScope>();
 
@@ -26,6 +30,12 @@ namespace DecafIde
         public void setNodeRequiresInit(IParseTree node, bool value) { nodeRequiresInit.Put(node, value); }
         public bool getNodeRequiresInit(IParseTree node) { return nodeRequiresInit.Get(node); }
 
+        public void setNodeTrueLabel(IParseTree node, string value) { nodeTrueLabel.Put(node, value); }
+        public string getNodeTrueLabel(IParseTree node) { return nodeTrueLabel.Get(node); }
+
+        public void setNodeFalseLabel(IParseTree node, string value) { nodeFalseLabel.Put(node, value); }
+        public string getNodeFalseLabel(IParseTree node) { return nodeFalseLabel.Get(node); }
+
         public IScope getNodeScope(IParseTree node) { return scopes.Get(node); }
         public STBasedGenerator(ParseTreeProperty<IScope> scopedTree)
             : base()
@@ -35,6 +45,7 @@ namespace DecafIde
 
         public override void EnterProgram(NewDecafParser.ProgramContext context)
         {
+            currentScope = getNodeScope(context);
             setNodeTemplate(context, mainTemplate);
         }
         public override void ExitProgram(NewDecafParser.ProgramContext context)
@@ -75,6 +86,7 @@ namespace DecafIde
 
         public override void EnterSingle_varDeclaration(NewDecafParser.Single_varDeclarationContext context)
         {
+            currentScope = getNodeScope(context);
             Template selfTemplate = stg.GetInstanceOf("Field");
             selfTemplate.Add("id", context.Id().GetText());
             setNodeTemplate(context, selfTemplate);
@@ -86,8 +98,7 @@ namespace DecafIde
             Template selfTemplate = getNodeTemplate(context);
             selfTemplate.Add("typeName", getNodeTemplate(context.varType()).Render());
 
-            IScope currentContext = getNodeScope(context);
-            VariableSymbol currentSymbol = currentContext.resolve(context.Id().GetText()) as VariableSymbol;
+            VariableSymbol currentSymbol = currentScope.resolve(context.Id().GetText()) as VariableSymbol;
 
             Template helperTemplate = stg.GetInstanceOf("ArrayFieldInit");
             helperTemplate.Add("size", currentSymbol.Size);
@@ -108,6 +119,8 @@ namespace DecafIde
             setNodeRequiresInit(context, true);
 
             setNodeTemplate(context, selfTemplate);
+
+            currentScope = getNodeScope(context);
         }
 
         public override void EnterSingle_structVarDeclaration(NewDecafParser.Single_structVarDeclarationContext context)
@@ -116,6 +129,9 @@ namespace DecafIde
             selfTemplate.Add("id", context.Id().GetText());
             setNodeRequiresInit(context, false);
             setNodeTemplate(context, selfTemplate);
+
+
+            currentScope = getNodeScope(context);
         }
         public override void ExitSingle_structVarDeclaration(NewDecafParser.Single_structVarDeclarationContext context)
         {
@@ -129,8 +145,7 @@ namespace DecafIde
             Template selfTemplate = getNodeTemplate(context);
             selfTemplate.Add("typeName", getNodeTemplate(context.varType()).Render());
 
-            IScope currentContext = getNodeScope(context);
-            VariableSymbol currentSymbol = currentContext.resolve(context.Id().GetText()) as VariableSymbol;
+            VariableSymbol currentSymbol = currentScope.resolve(context.Id().GetText()) as VariableSymbol;
 
             Template helperTemplate = stg.GetInstanceOf("ArrayFieldInit");
             helperTemplate.Add("size", currentSymbol.Size);
@@ -138,6 +153,8 @@ namespace DecafIde
             helperTemplate.Add("name", context.Id().GetText());
 
             setNodeInitTemplate(context, helperTemplate);
+
+            currentScope = getNodeScope(context);
         }
 
         public override void EnterArray_structVarDeclaration(NewDecafParser.Array_structVarDeclarationContext context)
@@ -153,6 +170,8 @@ namespace DecafIde
 
         public override void EnterStructDeclaration(NewDecafParser.StructDeclarationContext context)
         {
+
+            currentScope = getNodeScope(context);
             Template selfTemplate = stg.GetInstanceOf("StructDec");
             selfTemplate.Add("name", context.Id().GetText());
 
@@ -167,6 +186,17 @@ namespace DecafIde
                 Template childTemplate = getNodeTemplate(sCtx);
                 selfTemplate.Add("field", childTemplate.Render());
             }
+            currentScope = currentScope.getEnclosingScope();
+        }
+
+        public override void EnterBlock(NewDecafParser.BlockContext context)
+        {
+            currentScope = getNodeScope(context);
+        }
+
+        public override void ExitBlock(NewDecafParser.BlockContext context)
+        {
+            currentScope = currentScope.getEnclosingScope();
         }
 
         public override void EnterSingle_blockVarDeclaration(NewDecafParser.Single_blockVarDeclarationContext context)
@@ -200,8 +230,7 @@ namespace DecafIde
             Template selfTemplate = getNodeTemplate(context);
             selfTemplate.Add("typeName", getNodeTemplate(context.varType()).Render());
 
-            IScope currentContext = getNodeScope(context);
-            VariableSymbol currentSymbol = currentContext.resolve(context.Id().GetText()) as VariableSymbol;
+            VariableSymbol currentSymbol = currentScope.resolve(context.Id().GetText()) as VariableSymbol;
 
             Template helperTemplate = stg.GetInstanceOf("ArrayFieldInit");
             helperTemplate.Add("size", currentSymbol.Size);
@@ -315,6 +344,7 @@ namespace DecafIde
 
         public override void EnterMethodSignature(NewDecafParser.MethodSignatureContext context)
         {
+            currentScope = getNodeScope(context);
             Template selfTemplate = stg.GetInstanceOf("MethodSignature");
             setNodeTemplate(context, selfTemplate);
         }
@@ -330,6 +360,12 @@ namespace DecafIde
                 Template childTemplate = getNodeTemplate(decCtx);
                 selfTemplate.Add("parameters", childTemplate.Render());
             }
+            currentScope = currentScope.getEnclosingScope();
+        }
+
+        public override void EnterSingle_parameterDeclaration(NewDecafParser.Single_parameterDeclarationContext context)
+        {
+            currentScope = getNodeScope(context);
         }
 
         public override void ExitSingle_parameterDeclaration(NewDecafParser.Single_parameterDeclarationContext context)
@@ -337,12 +373,6 @@ namespace DecafIde
             Template selfTemplate = stg.GetInstanceOf("Parameter");
             selfTemplate.Add("typeName", TypeMapper.getMappedType(context.parameterType().GetText()));
             selfTemplate.Add("id", context.Id().GetText());
-            setNodeTemplate(context, selfTemplate);
-        }
-
-        public override void EnterIf_else_statement(NewDecafParser.If_else_statementContext context)
-        {
-            Template selfTemplate = stg.GetInstanceOf("IfElse");
             setNodeTemplate(context, selfTemplate);
         }
 
@@ -390,18 +420,36 @@ namespace DecafIde
             setNodeTemplate(context, selfTemplate);
         }
 
+        public override void EnterIf_else_statement(NewDecafParser.If_else_statementContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("IfElse");
+            string BTrue = LabelNameGenerator.getLabelName();
+            string BFalse = LabelNameGenerator.getLabelName();
+            string IfEnd = LabelNameGenerator.getLabelName();
+            selfTemplate.Add("LTrue", BTrue);
+            selfTemplate.Add("LFalse", BFalse);
+            selfTemplate.Add("LEnd", IfEnd);
+            setNodeTemplate(context, selfTemplate);
+            setNodeTrueLabel(context.expression(), BTrue);
+            setNodeFalseLabel(context.expression(), BFalse);
+        }
+
         public override void EnterIf_statement(NewDecafParser.If_statementContext context)
         {
             Template selfTemplate = stg.GetInstanceOf("IfCmd");
+            string BTrue = LabelNameGenerator.getLabelName();
+            string BFalse = LabelNameGenerator.getLabelName();
+            selfTemplate.Add("LTrue", BTrue);
+            selfTemplate.Add("LFalse", BFalse);
             setNodeTemplate(context, selfTemplate);
+            setNodeTrueLabel(context.expression(), BTrue);
+            setNodeFalseLabel(context.expression(), BFalse);
         }
 
         public override void ExitIf_else_statement(NewDecafParser.If_else_statementContext context)
         {
             Template selfTemplate = getNodeTemplate(context);
-            selfTemplate.Add("condition", getNodeTemplate(context.expression()).Render());
-            selfTemplate.Add("LZero", LabelNameGenerator.getLabelName());
-            selfTemplate.Add("LOne", LabelNameGenerator.getLabelName());
+            selfTemplate.Add("expression", getNodeTemplate(context.expression()).Render());
             selfTemplate.Add("ifcode", getNodeTemplate(context.ifBlock()).Render());
             selfTemplate.Add("elseCode", getNodeTemplate(context.elseBlock()).Render());
         }
@@ -409,24 +457,29 @@ namespace DecafIde
         public override void ExitIf_statement(NewDecafParser.If_statementContext context)
         {
             Template selfTemplate = getNodeTemplate(context);
-            selfTemplate.Add("condition", getNodeTemplate(context.expression()).Render());
-            selfTemplate.Add("LZero", LabelNameGenerator.getLabelName());
+            selfTemplate.Add("expression", getNodeTemplate(context.expression()).Render());
             selfTemplate.Add("ifcode", getNodeTemplate(context.ifBlock()).Render());
         }
 
         public override void EnterWhile_statement(NewDecafParser.While_statementContext context)
         {
             Template selfTemplate = stg.GetInstanceOf("While");
+            string BTrue = LabelNameGenerator.getLabelName();
+            string BFalse = LabelNameGenerator.getLabelName();
+            string LBegin = LabelNameGenerator.getLabelName();
+            selfTemplate.Add("LTrue", BTrue);
+            selfTemplate.Add("LFalse", BFalse);
+            selfTemplate.Add("LBegin", LBegin);
             setNodeTemplate(context, selfTemplate);
+            setNodeTrueLabel(context.expression(), BTrue);
+            setNodeFalseLabel(context.expression(), BFalse);
         }
 
         public override void ExitWhile_statement(NewDecafParser.While_statementContext context)
         {
             Template selfTemplate = getNodeTemplate(context);
-            selfTemplate.Add("condition", getNodeTemplate(context.expression()).Render());
-            selfTemplate.Add("LZero", LabelNameGenerator.getLabelName());
-            selfTemplate.Add("LOne", LabelNameGenerator.getLabelName());
-            selfTemplate.Add("statements", getNodeTemplate(context.whileBlock()).Render());
+            selfTemplate.Add("expression", getNodeTemplate(context.expression()).Render());
+            selfTemplate.Add("code", getNodeTemplate(context.whileBlock()).Render());
         }
 
         public override void EnterReturn_statement(NewDecafParser.Return_statementContext context)
@@ -453,20 +506,49 @@ namespace DecafIde
             Template selfTemplate = getNodeTemplate(context);
             foreach (var item in context.methodCall().arg())
             {
-                selfTemplate.Add("expression", item.expression().GetText());
+                selfTemplate.Add("expression", getNodeTemplate(item.expression()).Render());
                 selfTemplate.Add("parameterType", "int32");
             }
 
-            IScope currentContext = getNodeScope(context);
-            MethodSymbol currentSymbol = currentContext.resolve(context.methodCall().Id().GetText()) as MethodSymbol;
+
+            MethodSymbol currentSymbol = currentScope.resolve(context.methodCall().Id().GetText()) as MethodSymbol;
 
 
-            selfTemplate.Add("methodType", TypeMapper.getMappedType(currentSymbol.type.getName()));
+            //selfTemplate.Add("methodType", TypeMapper.getMappedType(currentSymbol.type.getName()));
+            selfTemplate.Add("methodType", "int32");
             selfTemplate.Add("methodName", context.methodCall().Id().GetText());
 
 
             setNodeTemplate(context, selfTemplate);
         }
+
+        public override void EnterMethodCall_expression(NewDecafParser.MethodCall_expressionContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("MethodCall");
+            setNodeTemplate(context, selfTemplate);
+        }
+
+        public override void ExitMethodCall_expression(NewDecafParser.MethodCall_expressionContext context)
+        {
+            Template selfTemplate = getNodeTemplate(context);
+            foreach (var item in context.methodCall().arg())
+            {
+                selfTemplate.Add("expression", getNodeTemplate(item.expression()).Render());
+                selfTemplate.Add("parameterType", "int32");
+            }
+
+
+            MethodSymbol currentSymbol = currentScope.resolve(context.methodCall().Id().GetText()) as MethodSymbol;
+
+
+            //selfTemplate.Add("methodType", TypeMapper.getMappedType(currentSymbol.type.getName()));
+            selfTemplate.Add("methodType", "int32");
+            selfTemplate.Add("methodName", context.methodCall().Id().GetText());
+
+
+            setNodeTemplate(context, selfTemplate);
+        }
+
 
         public override void ExitInt_literal_expression(NewDecafParser.Int_literal_expressionContext context)
         {
@@ -550,25 +632,135 @@ namespace DecafIde
         public override void ExitEqual(NewDecafParser.EqualContext context)
         {
             Template selfTemplate = stg.GetInstanceOf("Operation");
-            selfTemplate.Add("op", "ceq");
+            selfTemplate.Add("op", "beq");
             setNodeTemplate(context, selfTemplate);
         }
 
         public override void ExitNotEqual(NewDecafParser.NotEqualContext context)
         {
             Template selfTemplate = stg.GetInstanceOf("Operation");
-            selfTemplate.Add("op", "ceq");
-            selfTemplate.Add("requireNot", true);
+            selfTemplate.Add("op", "bne.un");
             setNodeTemplate(context, selfTemplate);
         }
 
         public override void ExitEq_op_expression(NewDecafParser.Eq_op_expressionContext context)
         {
-            Template selfTemplate = stg.GetInstanceOf("BinaryOp");
+            Template selfTemplate = stg.GetInstanceOf("Relop");
             selfTemplate.Add("left", getNodeTemplate(context.left).Render());
             selfTemplate.Add("right", getNodeTemplate(context.right).Render());
-            selfTemplate.Add("op", getNodeTemplate(context.eq_op()).Render());
+            selfTemplate.Add("brop", getNodeTemplate(context.eq_op()).Render());
+            string LTrue = getNodeTrueLabel(context);
+            string LFalse = getNodeFalseLabel(context);
+
+            selfTemplate.Add("LTrue", LTrue);
+            selfTemplate.Add("LFalse", LFalse);
             setNodeTemplate(context, selfTemplate);
+        }
+
+        public override void EnterParens_expression(NewDecafParser.Parens_expressionContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("Expression");
+            setNodeTemplate(context, selfTemplate);
+            setNodeTrueLabel(context.expression(), getNodeTrueLabel(context));
+            setNodeFalseLabel(context.expression(), getNodeFalseLabel(context));
+        }
+
+        public override void ExitParens_expression(NewDecafParser.Parens_expressionContext context)
+        {
+            Template selfTemplate = getNodeTemplate(context);
+            selfTemplate.Add("code", getNodeTemplate(context.expression()).Render());
+        }
+
+        public override void EnterAnd_expression(NewDecafParser.And_expressionContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("CondOp");
+            setNodeTemplate(context, selfTemplate);
+
+            string BTrue = getNodeTrueLabel(context);
+            string BFalse = getNodeFalseLabel(context);
+
+            string LeftTrue = LabelNameGenerator.getLabelName();
+            string LeftFalse = BFalse;
+
+            string RightTrue = BTrue;
+            string RightFalse = BFalse;
+
+            setNodeTrueLabel(context.left, LeftTrue);
+            setNodeFalseLabel(context.left, LeftFalse);
+
+            setNodeTrueLabel(context.right, RightTrue);
+            setNodeFalseLabel(context.right, RightFalse);
+
+            selfTemplate.Add("LeftLabel", LeftTrue);
+        }
+
+        public override void ExitAnd_expression(NewDecafParser.And_expressionContext context)
+        {
+            Template selfTemplate = getNodeTemplate(context);
+            Template leftTemplate = getNodeTemplate(context.left);
+            Template rightTemplate = getNodeTemplate(context.right);
+
+            selfTemplate.Add("left", leftTemplate.Render());
+            selfTemplate.Add("right", rightTemplate.Render());
+        }
+
+        public override void EnterOr_expression(NewDecafParser.Or_expressionContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("CondOp");
+            setNodeTemplate(context, selfTemplate);
+
+            string BTrue = getNodeTrueLabel(context);
+            string BFalse = getNodeFalseLabel(context);
+
+            string LeftTrue = BTrue;
+            string LeftFalse = LabelNameGenerator.getLabelName();
+
+            string RightTrue = BTrue;
+            string RightFalse = BFalse;
+
+            setNodeTrueLabel(context.left, LeftTrue);
+            setNodeFalseLabel(context.left, LeftFalse);
+
+            setNodeTrueLabel(context.right, RightTrue);
+            setNodeFalseLabel(context.right, RightFalse);
+
+            selfTemplate.Add("LeftLabel", LeftFalse);
+        }
+
+        public override void ExitOr_expression(NewDecafParser.Or_expressionContext context)
+        {
+            Template selfTemplate = getNodeTemplate(context);
+            Template leftTemplate = getNodeTemplate(context.left);
+            Template rightTemplate = getNodeTemplate(context.right);
+
+            selfTemplate.Add("left", leftTemplate.Render());
+            selfTemplate.Add("right", rightTemplate.Render());
+        }
+
+        public override void EnterNot_expression(NewDecafParser.Not_expressionContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("Expression");
+            setNodeTemplate(context, selfTemplate);
+
+            setNodeTrueLabel(context.expression(), getNodeFalseLabel(context));
+            setNodeFalseLabel(context.expression(), getNodeTrueLabel(context));
+        }
+        public override void ExitNot_expression(NewDecafParser.Not_expressionContext context)
+        {
+            Template selfTemplate = getNodeTemplate(context);
+            selfTemplate.Add("code", getNodeTemplate(context.expression()).Render());
+        }
+
+        public override void EnterVar_location_expression(NewDecafParser.Var_location_expressionContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("Expression");
+            setNodeTemplate(context, selfTemplate);
+        }
+
+        public override void ExitVar_location_expression(NewDecafParser.Var_location_expressionContext context)
+        {
+            Template selfTemplate = getNodeTemplate(context);
+            selfTemplate.Add("code", getNodeTemplate(context.location()).Render());
         }
 
         public override void VisitErrorNode(IErrorNode node)
@@ -576,5 +768,23 @@ namespace DecafIde
 
         }
 
+
+        public override void EnterExpression_statement(NewDecafParser.Expression_statementContext context)
+        {
+            Template selfTemplate = stg.GetInstanceOf("Expression");
+            setNodeTemplate(context, selfTemplate);
+            setNodeTrueLabel(context.expression(), getNodeTrueLabel(context));
+            setNodeFalseLabel(context.expression(), getNodeFalseLabel(context));
+        }
+        public override void ExitExpression_statement(NewDecafParser.Expression_statementContext context)
+        {
+            Template selfTemplate = getNodeTemplate(context);
+            selfTemplate.Add("code", getNodeTemplate(context.expression()).Render());
+        }
+
+        public override void EnterMainMethodSignature(NewDecafParser.MainMethodSignatureContext context)
+        {
+            currentScope = getNodeScope(context);
+        }
     }
 }

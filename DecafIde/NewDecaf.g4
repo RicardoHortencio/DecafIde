@@ -123,7 +123,8 @@ expression  //pending
 	|	bool_literal											#bool_literal_expression
 	|	location												#var_location_expression
 	|	methodCall												#methodCall_expression
-	|	left=expression cond_op right=expression							#cond_op_expression
+	|	left=expression '&&' right=expression							#and_expression
+	|	left=expression '||' right=expression							#or_expression
 	|	left=expression arith_op right=expression							#arith_expression
 	|	left=expression rel_op right=expression							#rel_op_expression
 	|	left=expression eq_op right=expression								#eq_op_expression
@@ -137,11 +138,6 @@ methodCall
 
 arg
 	: expression
-	;
-
-cond_op
-	:	'&&'
-	|	'||'
 	;
 
 arith_op
@@ -165,8 +161,8 @@ eq_op
 	;
 
 bool_literal
-	:	'true'
-	|	'false'
+	:	'true'													#trueLit
+	|	'false'													#falseLit
 	;
 
 Id

@@ -48,6 +48,7 @@
             this.errorTB = new System.Windows.Forms.TextBox();
             this.ErrorLbl = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainContainer)).BeginInit();
             this.MainContainer.Panel1.SuspendLayout();
@@ -200,7 +201,6 @@
             this.CodeTB.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.CodeTB.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.CodeTB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CodeTB.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.CodeTB.IsReplaceMode = false;
             this.CodeTB.Location = new System.Drawing.Point(0, 0);
             this.CodeTB.Name = "CodeTB";
@@ -282,6 +282,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem indentLinesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tryTemplateToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

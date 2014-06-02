@@ -27,6 +27,11 @@ namespace DecafIde
             setNodeScope(context, currentScope);
         }
 
+        public override void ExitProgram(NewDecafParser.ProgramContext context)
+        {
+            base.ExitProgram(context);
+        }
+
         public override void EnterStructDeclaration(NewDecafParser.StructDeclarationContext context)
         {
             StructSymbol ss = new StructSymbol(context.Id().GetText(), currentScope);
@@ -79,7 +84,7 @@ namespace DecafIde
 
         public override void ExitMethodSignature(NewDecafParser.MethodSignatureContext context)
         {
-            currentScope = currentScope.getEnclosingScope();
+            //currentScope = currentScope.getEnclosingScope();
         }
 
         public override void EnterSingle_parameterDeclaration(NewDecafParser.Single_parameterDeclarationContext context)
@@ -132,6 +137,7 @@ namespace DecafIde
             currentScope = ms;
             setNodeScope(context, currentScope);
         }
+
         //void defineVar(SymbolType getType)
     }
 }
