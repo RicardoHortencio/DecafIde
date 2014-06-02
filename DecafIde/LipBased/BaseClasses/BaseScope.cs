@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DecafIde.LipBased
 {
@@ -45,7 +42,7 @@ namespace DecafIde.LipBased
 
         public string getScopeName()
         {
-            return "";
+            return "base";
         }
     }
 }

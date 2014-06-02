@@ -1,4 +1,5 @@
 ﻿
+using DecafIde.HelperClasses;
 namespace DecafIde.ILCode
 {
     class VarType : Command

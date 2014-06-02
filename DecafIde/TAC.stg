@@ -14,6 +14,7 @@ Main(structDec, field, mainMethod, method, arrayFieldInit) ::= <<
 	{}
 
 	.class private auto ansi beforefieldinit Program
+	   extends [mscorlib]System.Object
 	{
 		<structDec; separator="\n">
 		<field; separator="\n">
@@ -23,7 +24,7 @@ Main(structDec, field, mainMethod, method, arrayFieldInit) ::= <<
 		.method public hidebysig specialname rtspecialname
 		instance void  .ctor() cil managed
 		{
-		  .maxstack  8
+		  .maxstack  32
 		  <arrayFieldInit; separator="\n">
 		  ldarg.0
 		  call       instance void [mscorlib]System.Object::.ctor()
@@ -39,8 +40,16 @@ ArrayFieldInit(name, size, type) ::= <<
   stfld      <name>
 >>
 
+ArrayInit(name, size, type) ::= <<
+  ldarg.0
+  ldc.i4.s   <size>
+  newarr     <type>
+  stloc.s  <name>
+>>
+
 StructDec(name, structDec, field) ::= <<
-.public static class <name>
+.class sequential ansi sealed nested public beforefieldinit <name>
+  extends [mscorlib]System.ValueType
   {
 	<structDec; separator="\n">
 	<field; separator="\n">
@@ -51,26 +60,36 @@ Field(typeName, id, isArray) ::= <<
 	.field public <typeName><if(isArray)>[]<endif> <id>program
 >>
 
+MethodSignature(typeName, id, parameters, stackSize, localVar, statements) ::= <<
+.method public hidebysig instance <typeName> '<id>'(<parameters; separator=", ">) cil managed
+>>
+
 Method(typeName, id, parameters, stackSize, localVar, statements) ::= <<
-.method public <typeName> '<id>'(<parameters; separator=", ">)
+  <methodSignature>
   {
-	.maxstack <stackSize>
+	.maxstack 32
 	.locals init (
 		<localVar; separator=", ">
 	)
+	<arrayInit; separator="\n">
 	<statements; separator="\n">
   } // end of method Program::'<id>'
   >>
+
+BaseBlock(statements) ::= <<
+	<statements; separator="\n">
+>>
 
 MainMethod(stackSize, localVar, statements) ::= <<
 	.method hidebysig private static void
 	Main(string[] y) cil managed
 	{
 		  .entrypoint
-		  .maxstack <stackSize>
+		  .maxstack 32
 		  .locals (
 			  <localVar; separator=", ">
 		  )
+		  <arrayInit; separator="\n">
 		  <statements; separator="\n">
 
 	} // end of method Program::Main
@@ -89,8 +108,8 @@ LocalVar(typeName, id, isArray) ::= <<
 >>
 
 BinaryOp(expressionOne, expressionTwo, op, requireNot) ::= <<
-	<expressionOne>
-	<expressionTwo>
+	<left>
+	<right>
 	<op>
 	<if(requireNot)>not<endif>
 >>
@@ -100,11 +119,6 @@ UnaryOp(expression, op) ::= <<
 	<op>
 >>
 
-Assignment(loadLocation, expression, storeLocation)  ::= <<
-	<loadLocation>
-	<expression>
-	<storeLocation>
->>
 
 IfCmd(expression, code, Lzero)  ::= <<
 	<expression>
@@ -140,4 +154,25 @@ Return(expression) ::= <<
 MethodCall(methodType, methodName, parameterType, expression) ::= <<
 	<expression; separator =";">
 	call instance <methodType> Program::'<methodName>'(<parameterType; separator =",">)
+>>
+
+Expression(anythi) ::= <<
+	<anythi; separator =";">
+>>
+
+LoadIntConstant(constant) ::= <<
+	ldc.i4.<constant>
+>>
+
+Assignment(local, expression) ::= <<
+	<expression>
+	stloc.s <local>
+>>
+
+LoadParameter(parameter) ::= <<
+	ldarg.s <parameter>
+>>
+
+Operation(op) ::= <<
+	<op>
 >>

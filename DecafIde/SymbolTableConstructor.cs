@@ -390,6 +390,7 @@ namespace DecafIde
         #region location
         public override void EnterSingle_location(DecafParser.Single_locationContext context)
         {
+            theScopeManager.GetEnclosingScope();
             Symbol tempSymbol = theScopeManager.FindSymbol(context.Id().GetText(), symbolCategory.Cvariable);
             if (context.location() != null)
             {

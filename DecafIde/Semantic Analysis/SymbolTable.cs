@@ -8,9 +8,9 @@ namespace DecafIde.Semantic_Analysis
     /// <summary>
     /// A symbol table is essentially a variable, methods and structs dictionary.
     /// </summary>
-    class SymbolTable
+    public class SymbolTable
     {
-        private SymbolTable parentScope;
+        public SymbolTable parentScope;
         private Dictionary<string, Symbol> theVariableTable;
         private Dictionary<string, Symbol> theMethodTable;
         private Dictionary<string, Symbol> theStructDeclTable;

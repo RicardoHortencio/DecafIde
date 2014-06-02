@@ -12,7 +12,7 @@ namespace DecafIde.LipBased
 
         public string getScopeName()
         {
-            return "globals";
+            return "Program";
         }
     }
 }

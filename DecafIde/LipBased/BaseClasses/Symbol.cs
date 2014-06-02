@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace DecafIde.LipBased
 {
     public class Symbol
     {
         String name;
-        IType type;
+        public IType type;
         IScope scope;
 
         internal IScope Scope
@@ -21,12 +18,14 @@ namespace DecafIde.LipBased
             this.name = name;
         }
 
-        public Symbol(String name, IType type):this(name)
+        public Symbol(String name, IType type)
+            : this(name)
         {
             this.type = type;
         }
 
-        public string getName() {
+        public string getName()
+        {
             return name;
         }
 

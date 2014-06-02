@@ -8,51 +8,51 @@ program
 	:	'class' Id '{' (structDeclaration
 	|	varDeclaration
 	|	methodDeclaration
-	|	mainMethodDeclaration)* '}'									//ya
+	|	mainMethodDeclaration)* '}'								//ya
 	;
 
 varDeclaration
-	:	varType Id ';'														#single_varDeclaration //ya
-	|	varType Id '[' Num ']' ';'											#array_varDeclaration //ya
+	:	varType Id ';'											#single_varDeclaration //ya
+	|	varType Id '[' Num ']' ';'								#array_varDeclaration //ya
 	;
 
 structVarDeclaration
-	:	varType Id ';'														#single_structVarDeclaration //pending
-	|	varType Id '[' Num ']' ';'											#array_structVarDeclaration //pending
+	:	varType Id ';'											#single_structVarDeclaration //ya
+	|	varType Id '[' Num ']' ';'								#array_structVarDeclaration //ya
 	;
 
 structDeclaration
-	:	'struct' Id '{' (structVarDeclaration)* '}'							//pending
+	:	'struct' Id '{' (structVarDeclaration)* '}'				//ya
 	;
 
 blockVarDeclaration
-	:	varType Id ';'														#single_blockVarDeclaration //pending
-	|	varType Id '[' Num ']' ';'											#array_blockVarDeclaration //pending
+	:	varType Id ';'											#single_blockVarDeclaration //ya
+	|	varType Id '[' Num ']' ';'								#array_blockVarDeclaration //ya
 	;
 
 varType
-	:	'int'																#int_varType
-	|	'char'																#char_varType
-	|	'boolean'															#boolean_varType
-	|	'struct' Id															#structImpl_varType
-	|	structDeclaration													#structDecl_varType
-	|	'void'																#void_varType
+	:	'int'													#int_varType
+	|	'char'													#char_varType
+	|	'boolean'												#boolean_varType
+	|	'struct' Id												#structImpl_varType
+	|	structDeclaration										#structDecl_varType
+	|	'void'													#void_varType
 	;
 
 mainMethodDeclaration
-	:	mainMethodSignature block											//no implementado
+	:	mainMethodSignature block								//no implementado
 	;
 
 mainMethodSignature
-	:	methodType 'main' '(' (parameter (',' parameter)*)? ')'				//pending
+	:	methodType 'main' '(' (parameter (',' parameter)*)? ')'	//pending
 	;
 
 methodDeclaration
-	:	methodSignature block												//no implementado
+	:	methodSignature block									//no implementado
 	;
 
 methodSignature
-	: methodType Id '(' (parameter (',' parameter)*)? ')'					//pending
+	: methodType Id '(' (parameter (',' parameter)*)? ')'		//pending
 	;
 
 methodType
@@ -63,7 +63,7 @@ methodType
 	;
 
 parameter
-	:	parameterType Id		 #single_parameterDeclaration				//pending
+	:	parameterType Id		 #single_parameterDeclaration	//pending
 	;
 
 parameterType
@@ -72,8 +72,9 @@ parameterType
 	|	'boolean'
 	;
 
+	// recordar las variables con arrayinit
 block
-	:	'{' (blockVarDeclaration)* (statement)* '}'							//pending
+	:	'{' (blockVarDeclaration)* (statement)* '}'				//pending
 	;
 
 ifBlock
@@ -92,17 +93,17 @@ statementBlock
 	:	'{' (blockVarDeclaration)* (statement)* '}'
 	;
 
-	//**************************************** FALTA *******************/
+	//**************************************** FALTA *************
 statement
-	:	'if' '(' expression ')' ifBlock 'else' elseBlock					#if_else_statement
-	|	'if' '(' expression ')' ifBlock										#if_statement
-	|	'while' '(' expression ')' whileBlock								#while_statement
-	|	'return' (expression)? ';'											#return_statement
-	|	methodCall ';'														#method_statement
-	|	statementBlock														#block_statement
-	|	location '=' expression ';'											#assign_statement
-	|	location '=' '(char)' expression ';'								#char_assign_statement
-	|	(expression)? ';'													#expression_statement
+	:	'if' '(' expression ')' ifBlock 'else' elseBlock		#if_else_statement
+	|	'if' '(' expression ')' ifBlock							#if_statement
+	|	'while' '(' expression ')' whileBlock					#while_statement
+	|	'return' (expression)? ';'								#return_statement
+	|	methodCall ';'											#method_statement
+	|	statementBlock											#block_statement
+	|	Id '=' expression ';'								#assign_statement
+	|	Id '=' '(char)' expression ';'					#char_assign_statement
+	|	(expression)? ';'										#expression_statement
 	;
 
 locationList
@@ -110,24 +111,24 @@ locationList
 	;
 
 location
-	:	Id (locationList)? 													#single_location
-	|	Id '[' expression ']' (locationList)?								#array_location
+	:	Id (locationList)? 										#single_location
+	|	Id '[' expression ']' (locationList)?					#array_location
 	;
 	// ******************** FALTA ************************/
 
 expression  //pending
-	:	location															#var_location_expression
-	|	methodCall															#methodCall_expression
-	|	Num																	#int_literal_expression
-	|	CharacterLiteral													#char_literal_expression
-	|	bool_literal														#bool_literal_expression
-	|	expression arith_op expression										#arith_expression
-	|	expression rel_op expression										#rel_op_expression
-	|	expression eq_op expression											#eq_op_expression
-	|	expression cond_op expression										#cond_op_expression
-	|	'-' expression														#negative_expression
-	|	'!' expression														#not_expression
-	|	'(' expression ')'													#parens_expression
+	:	'(' expression ')'										#parens_expression
+	|	Num														#int_literal_expression
+	|	CharacterLiteral										#char_literal_expression
+	|	bool_literal											#bool_literal_expression
+	|	location												#var_location_expression
+	|	methodCall												#methodCall_expression
+	|	left=expression cond_op right=expression							#cond_op_expression
+	|	left=expression arith_op right=expression							#arith_expression
+	|	left=expression rel_op right=expression							#rel_op_expression
+	|	left=expression eq_op right=expression								#eq_op_expression
+	|	'-' expression											#negative_expression
+	|	'!' expression											#not_expression
 	;
 
 methodCall
@@ -138,12 +139,17 @@ arg
 	: expression
 	;
 
+cond_op
+	:	'&&'
+	|	'||'
+	;
+
 arith_op
-	:	'+'
-	|	'-'
-	|	'*'
-	|	'/'
-	|	'%'
+	:	'+'														#add
+	|	'-'														#sub
+	|	'*'														#mul
+	|	'/'														#div
+	|	'%'														#rem
 	;
 
 rel_op
@@ -154,13 +160,8 @@ rel_op
 	;
 
 eq_op
-	:	'=='
-	|	'!='
-	;
-
-cond_op
-	:	'&&'
-	|	'||'
+	:	'=='													#equal
+	|	'!='													#notEqual
 	;
 
 bool_literal
